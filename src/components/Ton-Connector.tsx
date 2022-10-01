@@ -41,7 +41,7 @@ export default function TonConnector() {
 
   return (
     <TonhubConnectProvider
-      network="mainnet"
+      network="sandbox"
       url="https://ton.org/"
       name="TON TWA BOT"
       debug={false}

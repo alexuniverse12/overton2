@@ -12,7 +12,7 @@ export enum AppStatesEnum {
 
 export enum AppReducerActionTypeEnum {
     AddWallet = "AddWallet",
-    SetConnectionState = "SetConnectionState"
+    SaveDraftedQuestion = "SaveDraftedQuestion"
     // ShowIntro = "ShowIntro",
     // StartGame = "StartGame",
     // PickAnswer = "PickAnswer",
@@ -29,17 +29,18 @@ export const getInitialState = (): AppModelType => {
         questions: [],
         signState: {
             qrOpened: false
-        }
+        },
+        currDraftedQuestion: ""
     }
 }
 
 export type AppReducerActionType = {
     type: AppReducerActionTypeEnum.AddWallet,
 }  
-// | {
-//     type: GameReducerActionTypeEnum.PickAnswer,
-//     chosenAnswerIndex: number
-// } | {
+| {
+    type: AppReducerActionTypeEnum.SaveDraftedQuestion,
+    draftedQuestionText: string
+} 
 //     type: GameReducerActionTypeEnum.GoNextQuestion,
 //     timeLeft: number
 // } | {
@@ -55,12 +56,17 @@ export type AppReducerActionType = {
 
 export const reducer = (state: AppModelType, action: AppReducerActionType): AppModelType => {
     if (action.type === AppReducerActionTypeEnum.AddWallet) {
-        console.log(state)
         return {
             ...state,
             signState: {
                 qrOpened: true
             }
+        };
+    }
+    if (action.type === AppReducerActionTypeEnum.SaveDraftedQuestion) {
+        return {
+            ...state,
+            currDraftedQuestion: action.draftedQuestionText
         };
     }
     

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RemoteConnectPersistance, TonhubConnectProvider } from 'react-ton-x';
 import MainRouter from '../../App';
 import useAppModel from '../../hooks/useMainReducer';
@@ -45,10 +45,28 @@ const questionsSample = [
 const MainPage = () => {
   // const [connectionState, setConnectionState] = useState<RemoteConnectPersistance>('connection', { type: 'initing' });
   const { appModel, dispatch } = useAppModel();
-  // const type = JSON.parse(localStorage.getItem("connection") || "")
+  const type = JSON.parse(localStorage.getItem("connection") || "")
+  const [question, setQuestions] = useState();
   // console.log(connectionState.type, "F")
   // console.log(localStorage.getItem("connection"))
   // console.log(appModel, "MAIN APGE")
+  useEffect(() => {
+    // declare the async data fetching function
+  const fetchData = async () => {
+    // get the data from the api
+    // const data = await';
+    // convert the data to json
+    // const json = await response.json();
+
+    // set state with the result
+    // setQuestions(json);
+  }
+
+  // call the function
+  fetchData()
+    // make sure to catch any error
+    .catch(console.error);;
+  }, [])
   return (
     <>
       <AddQuestion/> 
@@ -67,7 +85,6 @@ const MainPage = () => {
             }
           </div>
       </div>
-      <AddQuestion/> 
     </>
     
     

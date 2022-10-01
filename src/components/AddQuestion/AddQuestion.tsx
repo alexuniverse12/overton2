@@ -4,20 +4,31 @@
     // date: string
 //   }
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAppModel from "../../hooks/useMainReducer";
+import { AppReducerActionTypeEnum } from "../../state/mainReducer";
+import InputForm from "../InputForm/InputForm";
+import { useForm } from "react-hook-form";
 import "./AddQuestion.css"
   
 //   const AddQuestion = ({title, questionText, date}: QuestionProps) => {
-  const AddQuestion = () => {
+const AddQuestion = () => {
+    const { appModel, dispatch } = useAppModel();
     const [isOpen, setOpen] = useState<boolean>(false);
-
+    
+    const onSubmit = (data: any) => console.log(data);
+    
+    // useEffect(() => {
+    //     dispatch({type: AppReducerActionTypeEnum.SaveDraftedQuestion, draftedQuestionText: watch("questionText")})
+    // }, [isOpen])
+    
+    console.log(appModel)
+    
+    
     if(isOpen){
         return(
             <div className="openedScreenWrapper">
-                <div className="formWrapper">
-                    <div className="closeWrapper" onClick={() => setOpen(false)}>
-                    </div>
-                </div>
+               <InputForm inputFieldName="draftedQuestion"/>
             </div>
         )
     } else {
@@ -27,6 +38,6 @@ import "./AddQuestion.css"
             </div>
         );
     }
-  }
+}
   
   export default AddQuestion;
