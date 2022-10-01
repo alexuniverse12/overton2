@@ -13,6 +13,7 @@ import { Counter } from "./Counter";
 import { useEffect } from "react";
 import { Jetton } from "./Jettons";
 import { TonWalletDetails } from "./TonWalletDetails";
+import useAppModel from "../hooks/useMainReducer";
 
 // TODO change to L3 client
 export const tc = new TonClient({
@@ -22,6 +23,7 @@ export const tc = new TonClient({
 let wasPendingConnectionChecked = false;
 
 export default function TonConnector() {
+  const { appModel, dispatch } = useAppModel();
   const [connectionState, setConnectionState] =
     useLocalStorage<RemoteConnectPersistance>("connection", {
       type: "initing",
@@ -34,6 +36,7 @@ export default function TonConnector() {
       window.location.reload();
     }
     wasPendingConnectionChecked = true;
+    console.log(connectionState, "state"); 
   }, [connectionState]);
 
   return (
@@ -60,12 +63,15 @@ function _TonConnecterInternal() {
     <>
       {!isConnected && <TonConnect />}
       {isConnected && (
-        <div style={{ textAlign: "left", marginBottom: 20 }}>
-          <TonWalletDetails />
-          <TransferTon />
-          <Counter />
-          <Jetton />
-        </div>
+        <>
+          <p>address</p>
+        </>
+        // <div style={{ textAlign: "left", marginBottom: 20 }}>
+        //   <TonWalletDetails />
+        //   <TransferTon />
+        //   <Counter />
+        //   <Jetton />
+        // </div>
       )}
     </>
   );
