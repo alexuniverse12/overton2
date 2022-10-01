@@ -28,18 +28,14 @@ export const getInitialState = (): AppModelType => {
     return {
         questions: [],
         signState: {
-            connectionState: null
+            qrOpened: false
         }
     }
 }
 
 export type AppReducerActionType = {
     type: AppReducerActionTypeEnum.AddWallet,
-    payload: any
-}  | {
-    type: AppReducerActionTypeEnum.SetConnectionState,
-    payload: RemoteConnectPersistance
-} 
+}  
 // | {
 //     type: GameReducerActionTypeEnum.PickAnswer,
 //     chosenAnswerIndex: number
@@ -58,10 +54,13 @@ export type AppReducerActionType = {
 // }
 
 export const reducer = (state: AppModelType, action: AppReducerActionType): AppModelType => {
-    if (action.type === AppReducerActionTypeEnum.SetConnectionState) {
+    if (action.type === AppReducerActionTypeEnum.AddWallet) {
+        console.log(state)
         return {
             ...state,
-            signState: action.payload
+            signState: {
+                qrOpened: true
+            }
         };
     }
     
