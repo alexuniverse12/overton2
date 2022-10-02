@@ -12,11 +12,11 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase.config";
 import { TransferTon } from '../../components/TransferTon';
 
-
 import "./SingleQuestion.css";
 import CommonHeader from '../../components/CommonHeader/CommonHeader';
 
 const SingleQuestion = () => {
+    const { appModel, dispatch } = useAppModel();
     return (
         <div className='singleQuestionScreenWrapper'>
             <div className='container'>

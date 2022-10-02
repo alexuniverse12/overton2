@@ -83,7 +83,7 @@ const MainPage = () => {
               {
                 questions.map(({questionText, date}, index) => {
                   return (
-                    <Question key={index} title={"aboba 228 asjfdwjej fewf je whh fwe h"} questionText={questionText} date={date} />
+                      <Question key={index} title={"aboba 228 asjfdwjej fewf je whh fwe h"} questionText={questionText} date={date} />
                     )
                   })
                 }

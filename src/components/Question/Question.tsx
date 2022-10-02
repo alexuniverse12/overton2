@@ -1,17 +1,29 @@
+import { useNavigate } from "react-router-dom";
+import useAppModel from "../../hooks/useMainReducer";
+import { AppReducerActionTypeEnum } from "../../state/mainReducer";
 import "./Question.css"
+
 
 export type QuestionProps = {
   title: string,
   questionText: string,
   date: string
+
 }
 
 
 const Question = ({ title, questionText, date }: QuestionProps) => {
+  const navigate = useNavigate();
+  const { appModel, dispatch } = useAppModel();
 
   return (
     <div className='QuestionWrapper'>
-      <h3 className="questionTitle">{title}</h3>
+      <h3 className="questionTitle" onClick={() => {
+          navigate("/singleQuestion")
+          dispatch({type: AppReducerActionTypeEnum.SetCurrSingleQuestion, title: title, description: questionText, date: date})
+      }}>
+        {title}
+      </h3>
       <p className="questionText">{questionText}</p>
       <p className="questionDate">{date}</p>
     </div>
