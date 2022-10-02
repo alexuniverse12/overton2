@@ -9,8 +9,6 @@ import Question from '../../components/Question/Question';
 import AddQuestion from '../../components/AddQuestion/AddQuestion';
 import "./MainPage.css";
 import isMobile from "is-mobile";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
-import { db } from '../../firebase.config';
 
 const questionsSample = [
   {
@@ -64,9 +62,6 @@ const MainPage = () => {
       console.log(questions, "SUAK")
     }
 
-    // call the function
-    fetchData().catch(console.error);;
-  }, [])
 
   const [isOpen, setOpen] = useState<boolean>(false);
   

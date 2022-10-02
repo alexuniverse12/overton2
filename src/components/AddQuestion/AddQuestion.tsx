@@ -27,12 +27,15 @@ const AddQuestion = () => {
 
 
     if (isOpen) {
+        document.body.style.overflow = "hidden";
+        window.scrollTo(0, 0);
         return (
-            <div className="openedScreenWrapper">
-                <InputForm  inputFieldName="draftedQuestion" />
+            <div className="openedScreenWrapper" onClick={function (e) { if (e.target === e.currentTarget) setOpen(false) }}>
+                <InputForm inputFieldName="draftedQuestion" />
             </div>
         )
     } else {
+        document.body.style.overflow = "unset";
         return (
             <div className="plusWrapper" onClick={() => setOpen(true)}>
                 <img src={plus} alt="" />

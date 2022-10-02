@@ -3,8 +3,8 @@
     mix-blend-mode: lighten;
     border-radius: 1.5rem;
     padding: 1.8rem;
-    max-width: 90rem;
 }
+
 
 .questionTitle {
     font-size: 1.9rem;
@@ -14,6 +14,7 @@
     max-height: 10rem;
     overflow: hidden;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .questionText {

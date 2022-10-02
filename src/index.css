@@ -7,6 +7,11 @@
   line-height: 2.2rem;
 }
 
+.mainPageWrapper {
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
 @media only screen and (max-width: 1024px) {
   * {
     font-size: calc(100vw / 640 * 10);
