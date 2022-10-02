@@ -11,7 +11,7 @@ import "./Ton-Connector.css"
 import { TonClient } from "ton";
 import { TransferTon } from "./TransferTon";
 import { Counter } from "./Counter";
-import { useEffect, useState } from "react";
+import { Children, useEffect, useState } from "react";
 import { Jetton } from "./Jettons";
 import { TonWalletDetails } from "./TonWalletDetails";
 import useAppModel from "../hooks/useMainReducer";
@@ -23,7 +23,7 @@ export const tc = new TonClient({
 
 let wasPendingConnectionChecked = false;
 
-export default function TonConnector() {
+export default function TonConnector({children}: {children: any}) {
   const { appModel, dispatch } = useAppModel();
   const [connectionState, setConnectionState] =
     useLocalStorage<RemoteConnectPersistance>("connection", {
@@ -42,7 +42,7 @@ export default function TonConnector() {
 
   return (
     <TonhubConnectProvider
-      network="sandbox"
+      network="mainnet"
       url="https://ton.org/"
       name="TON TWA BOT"
       debug={false}
@@ -52,6 +52,7 @@ export default function TonConnector() {
       }}
     >
       <_TonConnecterInternal />
+      {children}
     </TonhubConnectProvider>
   );
 }

@@ -65,11 +65,12 @@ const MainPage = () => {
       console.log(questions, "SUAK")
     }
   })
-
+  console.log(connect)
   const [isOpen, setOpen] = useState<boolean>(false);
   if(questions){
     return (
       <>
+      <TonConnector>
       {/* <TransferTon/> */}
           <AddQuestion />
           {/* {connect.state.type === "pending" && <TonConnector/> } */}
@@ -77,7 +78,7 @@ const MainPage = () => {
             <div className='mainPageContainer'>
               <div className='headerWrapper'>
                 <h3 className='title'>Overton</h3>
-                <TonConnector/>
+                {/* <TonConnector/> */}
                 {/* {connect.state.type === "pending" && <TonConnector/> } */}
                 {/* {connect.state.type === "initing" && <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>} */}
               </div>
@@ -97,6 +98,7 @@ const MainPage = () => {
               </div>
             </div>
           </div>
+          </TonConnector>
       </>
   
   
