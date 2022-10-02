@@ -71,7 +71,6 @@ const MainPage = () => {
     return (
       <>
       <TonConnector>
-      {/* <TransferTon/> */}
           <AddQuestion />
           {/* {connect.state.type === "pending" && <TonConnector/> } */}
           <div className='mainPageWrapper'>

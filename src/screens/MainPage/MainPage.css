@@ -16,6 +16,9 @@
 }
 
 .addWalletBtn {
+    position: absolute;
+    right: 5%;
+    top: 3%;
     padding: 1rem 2rem;
     font-size: 2.2rem;
     background: #07A0EE;
@@ -32,6 +35,7 @@ a {
     min-height: 100vh;
     width: 100vw;
 }
+
 .mainPageContainer {
     padding: 3rem 2rem;
     height: 100%;
