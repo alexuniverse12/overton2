@@ -46,6 +46,7 @@ const InputForm = ({ inputFieldName }: InputFormProps) => {
         <div className='FormWrapper'>
             <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>
                 <input placeholder="Title" className="questionTitleInput" defaultValue="" {...register(inputFieldName)} />
+                <input placeholder="Reward 💎" className="questionAmountInput" defaultValue="" {...register(inputFieldName)} />
                 <textarea placeholder="Description" className="questionBodyInput" defaultValue="" {...register(inputFieldName)} />
                 {errors.exampleRequired && <span>This field is required</span>}
                 <input className="questionSubmitBtn" type="submit" />
