@@ -8,7 +8,7 @@ export type AnswerProps = {
 }
 
 
-const Answer = ({ title, answerText, date }: AnswerProps) => {
+const Answer = ({ answerText, date }: AnswerProps) => {
     const giveReward = function (e: any) {
         // const tonData = JSON.parse(localStorage.getItem("connection") || "")
         // let today = new Date();
@@ -66,7 +66,6 @@ const Answer = ({ title, answerText, date }: AnswerProps) => {
 
     return (
         <div className='AnswerWrapper'>
-            <h3 className="answerTitle">{title}</h3>
             <p className="answerText">{answerText}</p>
 
             <div className="answerFooter">

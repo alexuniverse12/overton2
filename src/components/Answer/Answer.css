@@ -3,12 +3,12 @@
     mix-blend-mode: lighten;
     border-radius: 1.5rem;
     padding: 1.8rem;
+    width: 100%;
 }
 
 .answerFooter {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
 .giveRewardBtn {
@@ -33,13 +33,12 @@
 
 .answerText {
     color: black;
-    margin-top: 1.1rem;
     font-size: 1.5rem;
-    max-height: 18.5rem;
-    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .answerDate {
+    margin-top: 1.3rem;
     color: black;
     font-size: 1.5rem;
 }
