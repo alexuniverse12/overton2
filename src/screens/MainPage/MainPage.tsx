@@ -79,8 +79,8 @@ const MainPage = () => {
           <div className='mainPageWrapper'>
             <div className='headerWrapper'>
               <h3 className='title'>Overton</h3>
-              {/* <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a> */}
-               <TonConnector/>
+              <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>
+               {/* <TonConnector/> */}
             </div>
   
             <div className='questionsTabs'>
