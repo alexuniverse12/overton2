@@ -24,6 +24,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
     const [cont, setCont] = useState()
     const onSubmit = async (formData: any) => {
         //seed
+        document.body.style.overflow = 'unset';
         const tonData = JSON.parse(localStorage.getItem("connection") || "")
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
@@ -34,9 +35,9 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
         // const [contractAddress, setContractAddress] = useState("")
         if (inputFields.type === "submitQuestion") {
             // const tonData = JSON.parse(localStorage.getItem("connection") || "")
-            
+
             const questionsCollection = collection(db, "questions");
-            if(tonData){
+            if (tonData) {
                 try {
                     // const owner = connect.state.
                     const response: any = await axios({
@@ -73,7 +74,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                     questionContractAddress: cont,
                 });
 
-            } catch (error){
+            } catch (error) {
                 console.log(error)
             }
             window.location.reload()
@@ -107,7 +108,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                     date: rightDate
                 });
 
-            } catch (error){
+            } catch (error) {
                 console.log(error)
             }
 
@@ -115,7 +116,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
         }
     };
 
-    if(inputFields.type === "submitQuestion"){
+    if (inputFields.type === "submitQuestion") {
         return (
             <div className='FormWrapper'>
                 <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>

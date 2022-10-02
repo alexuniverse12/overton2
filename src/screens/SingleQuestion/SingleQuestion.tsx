@@ -87,7 +87,7 @@ const SingleQuestion = () => {
                 <div className='answersContainer'>
                     {answers.map(({ answer, date }, index) => {
                         return (
-                            <Answer key={index} title={answer} answerText={answer} date={date} />
+                            <Answer key={index} answerText={answer} date={date} />
                         )
                     })}
                 </div>

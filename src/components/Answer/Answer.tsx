@@ -53,7 +53,6 @@ const Answer = ({ title, answerText, date }: AnswerProps) => {
 
     return (
         <div className='AnswerWrapper'>
-            <h3 className="answerTitle">{title}</h3>
             <p className="answerText">{answerText}</p>
 
             <div className="answerFooter">
