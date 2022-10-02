@@ -83,7 +83,8 @@ function TonConnect() {
     return (
       <div className="tonConnect">
         <h2 className="qrTitle">Scan QR via<br/>TONHUB to sign in</h2>
-        <QRCode value={connect.state.link} />
+        {isOpen && <QRCode value={connect.state.link} />}
+        {/* {isOpen && <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>} */}
 {/*   <QRCode value={connect.state.link} />
         {isMobile() && <a className="addWalletBtn" href={connect.state.link.replace(
           "ton://",

@@ -9,6 +9,8 @@ import Question from '../../components/Question/Question';
 import AddQuestion from '../../components/AddQuestion/AddQuestion';
 import "./MainPage.css";
 import isMobile from "is-mobile";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase.config";
 
 const questionsSample = [
   {
@@ -61,7 +63,7 @@ const MainPage = () => {
       setQuestions(arr);
       console.log(questions, "SUAK")
     }
-
+  })
 
   const [isOpen, setOpen] = useState<boolean>(false);
   
@@ -96,6 +98,8 @@ const MainPage = () => {
   
   
      );
+  } else {
+    return <></>
   }
 }
 
