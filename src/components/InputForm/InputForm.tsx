@@ -18,12 +18,7 @@ export type InputFormProps = {
 
 const InputForm = ({ inputFields }: InputFormProps) => {
     const connect = useTonhubConnect();
-    console.log(connect, "MEWMEWMEEw");
 
-    // while (connect.state.type !== 'online') {
-    //     setTimeout(() => { }, 1000)
-    //     console.log(connect);
-    // }
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (formData: any) => {
         //seed
@@ -32,7 +27,7 @@ const InputForm = ({ inputFields }: InputFormProps) => {
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
-        console.log(formData)
+        // console.log(formData)
         const rightDate = mm + '/' + dd + '/' + yyyy;
         if (inputFields.type === "submitQuestion") {
             console.log("TEST")
@@ -87,17 +82,31 @@ const InputForm = ({ inputFields }: InputFormProps) => {
     };
     const { appModel, dispatch } = useAppModel();
 
-    return (
-        <div className='FormWrapper'>
-            <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>
-                <input placeholder="Title" className="questionTitleInput" defaultValue="" {...register(inputFields.questionTitle)} />
-                <input placeholder="Reward 💎" className="questionAmountInput" defaultValue="" {...register(inputFields.rewardAmount)} />
-                <textarea placeholder="Description" className="questionBodyInput" defaultValue="" {...register(inputFields.questionDescription)} />
-                {errors.exampleRequired && <span>This field is required</span>}
-                <input className="questionSubmitBtn" type="submit" />
-            </form>
-        </div>
-    );
+    if(inputFields.type === "submitQuestion"){
+        return (
+            <div className='FormWrapper'>
+                <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>
+                    <input placeholder="Title" className="questionTitleInput" defaultValue="" {...register(inputFields.questionTitle)} />
+                    <input placeholder="Reward 💎" className="questionAmountInput" defaultValue="" {...register(inputFields.rewardAmount)} />
+                    <textarea placeholder="Description" className="questionBodyInput" defaultValue="" {...register(inputFields.questionDescription)} />
+                    {errors.exampleRequired && <span>This field is required</span>}
+                    <input className="questionSubmitBtn" type="submit" />
+                </form>
+            </div>
+        );
+    } else {
+        
+        return (
+            <div className='FormWrapper'>
+                <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>
+                    <textarea placeholder="answer" className="questionBodyInput" defaultValue="" {...register(inputFields.answer)} />
+                    {errors.exampleRequired && <span>This field is required</span>}
+                    <input className="questionSubmitBtn" type="submit" />
+                </form>
+            </div>
+        );
+    }
+
 }
 
 export default InputForm;

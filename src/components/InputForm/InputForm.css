@@ -9,7 +9,7 @@
     cursor: pointer;
     margin: 4rem;
     height: 90%;
-
+    z-index: 1000;
     border-radius: 1.3rem;
     padding: 2rem;
 }

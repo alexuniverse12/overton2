@@ -18,6 +18,7 @@ import { TransferTon } from '../../components/TransferTon';
 
 import "./SingleQuestion.css";
 import CommonHeader from '../../components/CommonHeader/CommonHeader';
+import InputForm from '../../components/InputForm/InputForm';
 
 
 
@@ -41,17 +42,28 @@ const questionAnswers = [
         date: "01.10.2022"
     }
 ]
+
+const inputFields = {
+    answer: "answer",
+    type: "submitAnswer"
+    
+}
+
 const SingleQuestion = () => {
     const { appModel, dispatch } = useAppModel();
-    console.log(appModel)
+    const [modalOpen, setModalOpen] = useState(false);
     return (
         <div className='singleQuestionScreenWrapper'>
+            
+            { modalOpen && <InputForm inputFields={inputFields} />}
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>
                     <Question title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
                 </div>
-                <button className='addAnswerBtn'>Create Answer</button>
+                <button className='addAnswerBtn' onClick={() => {
+                    setModalOpen(true)
+                }}>Create Answer</button>
                 <div className='answersContainer'>
                     {questionAnswers.map(({ answerText, date }, index) => {
                         return (
