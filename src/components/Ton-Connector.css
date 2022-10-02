@@ -1,4 +1,4 @@
-.qrCodeModal {
+/* .qrCodeModal {
 
     position: absolute;
     width: 105vh;
@@ -8,8 +8,24 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-}
+} */
 
 .tonConnect {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    /* width: 100%; */
+    /* height: 100%; */
+    background: white;
+    z-index: 10000;
+}
+
+.qrTitle {
+    text-align: center;
+    font-size: 3.2rem;
+    font-weight: bold;
+    color: black;
+    line-height: 5rem;
 }

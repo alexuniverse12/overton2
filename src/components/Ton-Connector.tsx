@@ -59,13 +59,13 @@ export default function TonConnector() {
 function _TonConnecterInternal() {
   const connect = useTonhubConnect();
   const isConnected = connect.state.type === "online";
-
+  // const address: string = connect.state.type === "online" || connect.state!.walletConfig!.address
   return (
     <>
       {!isConnected && <TonConnect />}
-      {isConnected && (
+      {(isConnected && connect.state.type === "online") && (
         <>
-          <p>address</p>
+          <p>{connect.state!.walletConfig!.address.slice(0,20)}...</p>
         </>
       )}
     </>
@@ -77,12 +77,14 @@ function TonConnect() {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   if (connect.state.type === "initing") {
-    return <span>Waiting for session</span>;
+    return <span>initiating</span>;
   }
   if (connect.state.type === "pending") {
     return (
       <div className="tonConnect">
-
+        <h2 className="qrTitle">Scan QR via<br/>TONHUB to sign in</h2>
+        <QRCode value={connect.state.link} />
+{/*   <QRCode value={connect.state.link} />
         {isMobile() && <a className="addWalletBtn" href={connect.state.link.replace(
           "ton://",
           "https://tonhub.com/"
@@ -94,7 +96,7 @@ function TonConnect() {
             <div className="qrCodeModalText"> Scan with your mobile tonhub wallet:</div>
               <QRCode value={connect.state.link} />
           </div>
-        }
+        } */}
       </div >
     );
   }

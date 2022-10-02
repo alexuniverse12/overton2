@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { RemoteConnectPersistance, TonhubConnectProvider } from 'react-ton-x';
+import { RemoteConnectPersistance, TonhubConnectProvider, useTonhubConnect } from 'react-ton-x';
 import MainRouter from '../../App';
 import useAppModel from '../../hooks/useMainReducer';
 import { AppReducerActionTypeEnum } from '../../state/mainReducer';
@@ -48,7 +48,7 @@ const questionsSample = [
 const MainPage = () => {
   // const [connectionState, setConnectionState] = useState<RemoteConnectPersistance>('connection', { type: 'initing' });
   const { appModel, dispatch } = useAppModel();
-
+  const connect = useTonhubConnect();
   const [questions, setQuestions] = useState(questionsSample);
   
   useEffect(() => {
@@ -69,18 +69,18 @@ const MainPage = () => {
   }, [])
 
   const [isOpen, setOpen] = useState<boolean>(false);
-
+  
   if(questions){
     return (
       <>
-        <div style={{ position: "relative" }}>
           <AddQuestion />
-  
+          {/* {connect.state.type === "pending" && <TonConnector/> } */}
           <div className='mainPageWrapper'>
             <div className='headerWrapper'>
               <h3 className='title'>Overton</h3>
-              {/* <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a> */}
-               <TonConnector/>
+              <TonConnector/>
+              {/* {connect.state.type === "pending" && <TonConnector/> } */}
+              {/* {connect.state.type === "initing" && <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>} */}
             </div>
   
             <div className='questionsTabs'>
@@ -97,7 +97,6 @@ const MainPage = () => {
               }
             </div>
           </div>
-        </div>
       </>
   
   
