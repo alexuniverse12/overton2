@@ -1,0 +1,28 @@
+.container {
+    padding: 3rem 2rem;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.singleQuestion {
+    margin: 3rem 0;
+}
+
+.addAnswerBtn {
+    padding: 1rem 2rem;
+    font-size: 2.2rem;
+    background: #07A0EE;
+    border-radius: 1.3rem;
+    font-weight: 700;
+    width: 100%;
+}
+
+.answersContainer {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+}

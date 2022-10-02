@@ -1,0 +1,32 @@
+.AnswerWrapper {
+    background: #DDF3FE;
+    mix-blend-mode: lighten;
+    border-radius: 1.5rem;
+    padding: 1.8rem;
+}
+
+
+.answerTitle {
+    font-size: 1.9rem;
+    display: flex;
+    align-items: center;
+    color: black;
+    max-height: 10rem;
+    overflow: hidden;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.answerText {
+    color: black;
+    margin-top: 1.1rem;
+    font-size: 1.5rem;
+    max-height: 18.5rem;
+    overflow: hidden;
+}
+
+.answerDate {
+    margin-top: 1.3rem;
+    color: black;
+    font-size: 1.5rem;
+}
