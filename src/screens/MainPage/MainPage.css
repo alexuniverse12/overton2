@@ -1,4 +1,57 @@
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.title {
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 3.7rem;
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+
+.addWalletBtn {
+    padding: 0.5rem 1.2rem;
+    font-size: 1.4rem;
+    background: #07A0EE;
+    border-radius: 0.6rem;
+    font-weight: 700;
+}
+
+a {
+    all: unset;
+    cursor: pointer;
+}
+
 .mainPageWrapper {
-    height: 100%;
-    width: 100%;
+    padding: 1rem 1rem;
+}
+
+.questionsTabs {
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0;
+
+}
+
+.questionsTab {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #07A0EE;
+}
+
+.myQuestionsTab {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.questionsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }

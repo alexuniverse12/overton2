@@ -7,15 +7,15 @@ export type QuestionProps = {
 }
 
 
-const Question = ({title, questionText, date}: QuestionProps) => {
+const Question = ({ title, questionText, date }: QuestionProps) => {
 
   return (
     <div className='QuestionWrapper'>
-      <h3>{title}</h3>
-      <p>{questionText}</p>  
-      <p>{date}</p>  
+      <h3 className="questionTitle">{title}</h3>
+      <p className="questionText">{questionText}</p>
+      <p className="questionDate">{date}</p>
     </div>
-    
+
   );
 }
 
