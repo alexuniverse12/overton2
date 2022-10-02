@@ -42,7 +42,6 @@ const InputForm = ({ inputFields }: InputFormProps) => {
                 console.log("TEST 2")
 
                 try {
-                    // const owner = connect.state.
                     const response: any = await axios({
                         method: 'post',
                         url: "http://104.248.100.22:3000/deploy",
@@ -51,16 +50,22 @@ const InputForm = ({ inputFields }: InputFormProps) => {
                         }
                     });
                     const responseData = response.data
-                    console.log(response.data, "SUKA BLYAT");
                     const reqTrans = await connect.api.requestTransaction({
                         to: responseData.contractAddress,
-                        value: formData.rewardAmount,
+                        value: (parseFloat(formData.rewardAmount) * 1e9).toString(),
                         stateInit: responseData.stateInit,
                         text: "Smart contract deployment",
                         payload: responseData.payload
                     })
                     console.log(reqTrans)
-                    console.log(JSON.parse(response.data), "SUKA BLYAT");
+
+                    await addDoc(questionsCollection, {
+                        userID: tonData.walletConfig.address,
+                        title: formData.questionTitle,
+                        questionText: formData.questionDescription,
+                        rewardAmount: formData.rewardAmount,
+                        date: rightDate
+                    });
                 } catch (error) {
                     console.error(error, "IDI NAXUI");
                 }
@@ -68,13 +73,7 @@ const InputForm = ({ inputFields }: InputFormProps) => {
             }
 
 
-            // await addDoc(questionsCollection, {
-            //     userID: tonData.walletConfig.address,
-            //     title: data.questionTitle,
-            //     questionText: data.questionDescription,
-            //     rewardAmount: data.rewardAmount,
-            //     date: rightDate
-            // });
+
 
             // console.log("user set nickname and languages: ", uid);
             // dispatch(getCustomUserInfo(uid))
