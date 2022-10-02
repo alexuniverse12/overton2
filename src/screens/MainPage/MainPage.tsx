@@ -12,6 +12,7 @@ import isMobile from "is-mobile";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase.config";
 import { TransferTon } from '../../components/TransferTon';
+import CommonHeader from '../../components/CommonHeader/CommonHeader';
 
 const questionsSample = [
   {
@@ -73,13 +74,7 @@ const MainPage = () => {
         {connect.state.type === "online" && <AddQuestion />}
         <div className='mainPageWrapper'>
           <div className='mainPageContainer'>
-            <div className='headerWrapper'>
-              <h3 className='title'>Overton</h3>
-              {/* <TonConnector/> */}
-              {/* {connect.state.type === "pending" && <TonConnector/> } */}
-              {/* {connect.state.type === "initing" && <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>} */}
-            </div>
-  
+            <CommonHeader/>
             <div className='questionsTabs'>
               <div className='questionsTab'>Questions</div>
               <div className='myQuestionsTab'>My questions</div>

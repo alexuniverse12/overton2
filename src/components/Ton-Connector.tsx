@@ -51,7 +51,7 @@ export default function TonConnector({children}: {children: any}) {
         setConnectionState(s as RemoteConnectPersistance);
       }}
     >
-      <_TonConnecterInternal />
+      {/* <_TonConnecterInternal /> */}
       {children}
     </TonhubConnectProvider>
   );
