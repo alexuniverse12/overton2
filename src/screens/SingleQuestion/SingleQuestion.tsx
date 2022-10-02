@@ -56,7 +56,7 @@ const SingleQuestion = () => {
     return (
         <div className='singleQuestionScreenWrapper'>
 
-            {modalOpen && <div className="openedScreenWrapper" onClick={function (e) { if (e.target === e.currentTarget) { setModalOpen(false); document.body.style.overflow = 'unset'; } }}><InputForm inputFields={inputFields} /></div>}
+            {modalOpen && <div className="openedScreenWrapper" onClick={function (e) { if (e.target === e.currentTarget) { setModalOpen(false); document.body.style.overflow = 'unset'; } }}><InputForm inputFields={inputFields} setModal={setModalOpen} /></div>}
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>
