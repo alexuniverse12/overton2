@@ -1,5 +1,58 @@
 .FormWrapper {
-    width: 80%;
-    height: 80%;
-    background-color: #DDF3FE;
+    background-color: black;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    cursor: pointer;
+    margin: 4rem;
+    height: 90%;
+
+    border-radius: 1.3rem;
+    padding: 2rem;
+}
+
+.addQuestionForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 2rem;
+}
+
+.questionBodyInput {
+    all: unset;
+    font-size: 2.2rem;
+    padding: 1rem 2rem;
+    background: #DDF3FE;
+    border-radius: 1.3rem;
+    font-weight: 700;
+    flex: 1;
+    color: black;
+}
+
+.questionTitleInput::placeholder,
+.questionBodyInput::placeholder {
+    color: rgb(186, 186, 186);
+}
+
+.questionSubmitBtn {
+    all: unset;
+    font-size: 2.2rem;
+    padding: 1rem 2rem;
+    background: #07A0EE;
+    border-radius: 1.3rem;
+    font-weight: 700;
+}
+
+.questionTitleInput {
+    all: unset;
+    font-size: 2.2rem;
+    padding: 1rem 2rem;
+    background: #DDF3FE;
+    border-radius: 1.3rem;
+    font-weight: 700;
+    color: black;
 }

@@ -9,8 +9,6 @@ import Question from '../../components/Question/Question';
 import AddQuestion from '../../components/AddQuestion/AddQuestion';
 import "./MainPage.css";
 import isMobile from "is-mobile";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
-import { db } from '../../firebase.config';
 
 const questionsSample = [
   {
@@ -49,60 +47,41 @@ const MainPage = () => {
   // const [connectionState, setConnectionState] = useState<RemoteConnectPersistance>('connection', { type: 'initing' });
   const { appModel, dispatch } = useAppModel();
 
-  const [questions, setQuestions] = useState(questionsSample);
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "questions"));
-      let arr: any = [];
-      querySnapshot.forEach((doc: any) => {
-        // here we store order data + its id in firebase
-        arr.push({...doc.data(), id: doc.id});
-      })
-      
-      setQuestions(arr);
-      console.log(questions, "SUAK")
-    }
+  const [question, setQuestions] = useState();
 
-    // call the function
-    fetchData().catch(console.error);;
-  }, [])
 
   const [isOpen, setOpen] = useState<boolean>(false);
 
-  if(questions){
-    return (
-      <>
-        <div style={{ position: "relative" }}>
-          <AddQuestion />
-  
-          <div className='mainPageWrapper'>
-            <div className='headerWrapper'>
-              <h3 className='title'>Overton</h3>
-              <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>
-               {/* <TonConnector/> */}
-            </div>
-  
-            <div className='questionsTabs'>
-              <div className='questionsTab'>Questions</div>
-              <div className='myQuestionsTab'>My questions</div>
-            </div>
-            <div className='questionsWrapper'>
-              {
-                questions.map(({questionText, date}, index) => {
-                  return (
-                    <Question key={index} title={"aboba 228 asjfdwjej fewf je whh fwe h"} questionText={questionText} date={date} />
-                  )
-                })
-              }
-            </div>
-          </div>
+  return (
+    <><div style={{ position: "relative" }}>
+      <AddQuestion />
+
+      <div className='mainPageWrapper'>
+        <div className='headerWrapper'>
+          <h3 className='title'>Overton</h3>
+          <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>
+          {/* <TonConnector></TonConnector> */}
         </div>
-      </>
-  
-  
-     );
-  }
+
+        <div className='questionsTabs'>
+          <div className='questionsTab'>Questions</div>
+          <div className='myQuestionsTab'>My questions</div>
+        </div>
+        <div className='questionsWrapper'>
+          {
+            questionsSample.map(({ title, questionText, date }, index) => {
+              return (
+                <Question key={index} title={title} questionText={questionText} date={date} />
+              )
+            })
+          }
+        </div>
+      </div>
+    </div>
+    </>
+
+
+  );
 }
 
 export default MainPage;

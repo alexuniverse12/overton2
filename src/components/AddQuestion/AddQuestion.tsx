@@ -29,7 +29,7 @@ const AddQuestion = () => {
     if (isOpen) {
         return (
             <div className="openedScreenWrapper">
-                <InputForm  inputFieldName="draftedQuestion" />
+                <InputForm inputFieldName="draftedQuestion" />
             </div>
         )
     } else {
