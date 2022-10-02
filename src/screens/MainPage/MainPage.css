@@ -40,18 +40,20 @@ a {
 }
 
 .questionsTab {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     font-weight: 500;
     color: #07A0EE;
 }
 
 .myQuestionsTab {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     font-weight: 500;
 }
 
 .questionsWrapper {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     gap: 1.5rem;
 }

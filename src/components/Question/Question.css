@@ -3,10 +3,12 @@
     mix-blend-mode: lighten;
     border-radius: 1rem;
     padding: 1rem 1.2rem;
+    height: 18.5rem;
+    width: 34.6rem;
 }
 
 .questionTitle {
-    font-size: 1.2rem;
+    font-size: 1.9rem;
     display: flex;
     align-items: center;
 
@@ -16,9 +18,11 @@
 .questionText {
     color: black;
     margin-top: 0.5rem;
+    font-size: 1.5rem;
 }
 
 .questionDate {
     margin-top: 0.5rem;
     color: black;
+    font-size: 1.5rem;
 }
