@@ -19,13 +19,19 @@ const InputForm = ({ inputFieldName }: InputFormProps) => {
     const onSubmit = async (data: any) => {
         //seed
         const tonData = JSON.parse(localStorage.getItem("connection") || "")
-
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        
+        const rightDate = mm + '/' + dd + '/' + yyyy;
         
         if(inputFieldName === "draftedQuestion"){
             const questionsCollection = collection(db, "questions");
                 await addDoc(questionsCollection, {
                     userID: tonData.walletConfig.address,
-                    questionText: data.draftedQuestion
+                    questionText: data.draftedQuestion,
+                    date: rightDate
                 });
 
                 // console.log("user set nickname and languages: ", uid);

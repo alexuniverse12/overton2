@@ -92,7 +92,7 @@ function TonConnect() {
         {!isMobile() &&
           <div className="qrCodeModal">
             <div className="qrCodeModalText"> Scan with your mobile tonhub wallet:</div>
-            <QRCode value={connect.state.link} />
+              <QRCode value={connect.state.link} />
           </div>
         }
       </div >
