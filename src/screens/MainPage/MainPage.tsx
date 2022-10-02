@@ -73,25 +73,27 @@ const MainPage = () => {
           <AddQuestion />
           {/* {connect.state.type === "pending" && <TonConnector/> } */}
           <div className='mainPageWrapper'>
-            <div className='headerWrapper'>
-              <h3 className='title'>Overton</h3>
-              <TonConnector/>
-              {/* {connect.state.type === "pending" && <TonConnector/> } */}
-              {/* {connect.state.type === "initing" && <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>} */}
-            </div>
-  
-            <div className='questionsTabs'>
-              <div className='questionsTab'>Questions</div>
-              <div className='myQuestionsTab'>My questions</div>
-            </div>
-            <div className='questionsWrapper'>
-              {
-                questions.map(({questionText, date}, index) => {
-                  return (
-                    <Question key={index} title={"aboba 228 asjfdwjej fewf je whh fwe h"} questionText={questionText} date={date} />
-                  )
-                })
-              }
+            <div className='mainPageContainer'>
+              <div className='headerWrapper'>
+                <h3 className='title'>Overton</h3>
+                <TonConnector/>
+                {/* {connect.state.type === "pending" && <TonConnector/> } */}
+                {/* {connect.state.type === "initing" && <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>} */}
+              </div>
+    
+              <div className='questionsTabs'>
+                <div className='questionsTab'>Questions</div>
+                <div className='myQuestionsTab'>My questions</div>
+              </div>
+              <div className='questionsWrapper'>
+                {
+                  questions.map(({questionText, date}, index) => {
+                    return (
+                      <Question key={index} title={"aboba 228 asjfdwjej fewf je whh fwe h"} questionText={questionText} date={date} />
+                      )
+                    })
+                  }
+              </div>
             </div>
           </div>
       </>

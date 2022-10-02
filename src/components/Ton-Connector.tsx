@@ -57,12 +57,15 @@ export default function TonConnector() {
 }
 
 function _TonConnecterInternal() {
+  const [isOpen, setOpen] = useState<boolean>(false);
+  document.body.style.overflow = "unset"
   const connect = useTonhubConnect();
   const isConnected = connect.state.type === "online";
   // const address: string = connect.state.type === "online" || connect.state!.walletConfig!.address
   return (
     <>
-      {!isConnected && <TonConnect />}
+      {(!isConnected && !isOpen) && <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>}
+      {(!isConnected && isOpen)  && <TonConnect isOpen={isOpen} setOpen={setOpen}/>}
       {(isConnected && connect.state.type === "online") && (
         <>
           <p>{connect.state!.walletConfig!.address.slice(0,20)}...</p>
@@ -72,32 +75,20 @@ function _TonConnecterInternal() {
   );
 }
 
-function TonConnect() {
+function TonConnect({isOpen, setOpen}: {isOpen: any, setOpen: React.Dispatch<React.SetStateAction<boolean>>}) {
   const connect = useTonhubConnect();
-  const [isOpen, setOpen] = useState<boolean>(false);
+  
 
   if (connect.state.type === "initing") {
     return <span>initiating</span>;
   }
   if (connect.state.type === "pending") {
+    document.body.style.overflow = "hidden"
     return (
       <div className="tonConnect">
         <h2 className="qrTitle">Scan QR via<br/>TONHUB to sign in</h2>
-        {isOpen && <QRCode value={connect.state.link} />}
-        {/* {isOpen && <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>} */}
-{/*   <QRCode value={connect.state.link} />
-        {isMobile() && <a className="addWalletBtn" href={connect.state.link.replace(
-          "ton://",
-          "https://tonhub.com/"
-        )
-        }> Add Wallet</a>}
-
-        {!isMobile() &&
-          <div className="qrCodeModal">
-            <div className="qrCodeModalText"> Scan with your mobile tonhub wallet:</div>
-              <QRCode value={connect.state.link} />
-          </div>
-        } */}
+        <QRCode value={connect.state.link} />
+        <a className='addWalletBtn' onClick={() => setOpen(false)}>Close</a>
       </div >
     );
   }
