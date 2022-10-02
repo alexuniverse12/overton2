@@ -19,23 +19,22 @@ export type InputFormProps = {
 const InputForm = ({ inputFields }: InputFormProps) => {
     const connect = useTonhubConnect();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (formData: any) => {
         //seed
         const tonData = JSON.parse(localStorage.getItem("connection") || "")
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
-        console.log(data)
+        console.log(formData)
         const rightDate = mm + '/' + dd + '/' + yyyy;
-
         if (inputFields.type === "submitQuestion") {
             console.log("TEST")
             const tonData = JSON.parse(localStorage.getItem("connection") || "")
             const questionsCollection = collection(db, "questions");
             if(tonData){
                 console.log("TEST 2")
-                // connect.api.requestTransaction()
+                
                 try {
                     // const owner = connect.state.
                     const response: any = await axios({
@@ -45,7 +44,17 @@ const InputForm = ({ inputFields }: InputFormProps) => {
                               owner: tonData.walletConfig.address,
                             }
                     });
-                    console.log(JSON.parse(response), "SUKA BLYAT");
+                    const responseData = response.data
+                    console.log(response.data, "SUKA BLYAT");
+                    const reqTrans = await connect.api.requestTransaction({
+                        to: responseData.contractAddress,
+                        value: formData.rewardAmount,
+                        stateInit: responseData.stateInit,
+                        text: "Smart contract deployment",
+                        payload: responseData.payload
+                    })
+                    console.log(reqTrans)
+                    console.log(JSON.parse(response.data), "SUKA BLYAT");
                 } catch (error) {
                     console.error(error, "IDI NAXUI");
                 }

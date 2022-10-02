@@ -11,6 +11,7 @@ import "./MainPage.css";
 import isMobile from "is-mobile";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase.config";
+import { TransferTon } from '../../components/TransferTon';
 
 const questionsSample = [
   {
@@ -66,10 +67,10 @@ const MainPage = () => {
   })
 
   const [isOpen, setOpen] = useState<boolean>(false);
-  
   if(questions){
     return (
       <>
+      {/* <TransferTon/> */}
           <AddQuestion />
           {/* {connect.state.type === "pending" && <TonConnector/> } */}
           <div className='mainPageWrapper'>
