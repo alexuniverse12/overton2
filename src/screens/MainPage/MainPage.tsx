@@ -67,14 +67,14 @@ const MainPage = () => {
                     console.log(connect)
                     /* @ts-ignore */
                     return item.userID !== connect.state!.walletConfig!.address
-                  }).map(({ questionText, date, title,contractAddress }, index) => {
+                  }).map(({ questionText, date, title, questionContractAddress }, index) => {
                     return (
-                      <Question key={index} title={title} questionText={questionText} date={date} contractAddress={contractAddress} />
+                      <Question key={index} title={title} questionText={questionText} date={date} contractAddress={questionContractAddress} />
                     )
                   }) :
-                  questions.map(({ questionText, date, title, contractAddress }, index) => {
+                  questions.map(({ questionText, date, title, questionContractAddress }, index) => {
                     return (
-                      <Question key={index} title={title} questionText={questionText} date={date} contractAddress={contractAddress}/>
+                      <Question key={index} title={title} questionText={questionText} date={date} contractAddress={questionContractAddress}/>
                     )
                   })))}
 

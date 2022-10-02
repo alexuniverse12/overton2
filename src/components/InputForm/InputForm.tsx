@@ -12,11 +12,12 @@ import axios from "axios";
 
 export type InputFormProps = {
     inputFields: any
+    setModal?: any,
 }
 
 
 
-const InputForm = ({ inputFields }: InputFormProps) => {
+const InputForm = ({ inputFields, setModal }: InputFormProps) => {
     const connect = useTonhubConnect();
     const { appModel, dispatch } = useAppModel();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -96,11 +97,12 @@ const InputForm = ({ inputFields }: InputFormProps) => {
             //         console.error(error, "IDI NAXUI 2");
             //     }
             // }
+            // console.log(appModel.currQuestion)
             try {
                 await addDoc(answersCollection, {
                     // @ts-ignore
                     userID: connect.state.walletConfig.address,
-                    questionID: appModel.currQuestion.questionContractAddress,
+                    questionID: appModel.currQuestion.contractAddress,
                     answer: inputFields.answer,
                     date: rightDate
                 });
@@ -108,6 +110,8 @@ const InputForm = ({ inputFields }: InputFormProps) => {
             } catch (error){
                 console.log(error)
             }
+
+            setModal(false)
         }
     };
 
@@ -124,7 +128,6 @@ const InputForm = ({ inputFields }: InputFormProps) => {
             </div>
         );
     } else {
-        
         return (
             <div className='FormWrapper'>
                 <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>

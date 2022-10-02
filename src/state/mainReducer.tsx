@@ -78,7 +78,6 @@ export const reducer = (state: AppModelType, action: AppReducerActionType): AppM
     //     };
     // }
     if (action.type === AppReducerActionTypeEnum.HandleCurrQuestion) {
-        console.log(state, "ABOBA")
         return {
             ...state,
             currQuestion: {

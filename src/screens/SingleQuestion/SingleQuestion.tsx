@@ -52,10 +52,14 @@ const inputFields = {
 const SingleQuestion = () => {
     const { appModel, dispatch } = useAppModel();
     const [modalOpen, setModalOpen] = useState(false);
+
+    useEffect(() => {
+
+    }, [modalOpen])
     return (
         <div className='singleQuestionScreenWrapper'>
             
-            { modalOpen && <InputForm inputFields={inputFields} />}
+            { modalOpen && <InputForm setModal={setModalOpen} inputFields={inputFields} />}
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>

@@ -22,7 +22,6 @@ const Question = ({ title, questionText, date, contractAddress}: QuestionProps) 
     <div className='QuestionWrapper'>
       <h3 className="questionTitle" onClick={() => {
         dispatch({type: AppReducerActionTypeEnum.HandleCurrQuestion, title: title, description: questionText, date: date, contractAddress: contractAddress})
-        console.log(appModel, "WHY")
         navigate("/singleQuestion")
         
       }}>
