@@ -1,8 +1,7 @@
 .plusWrapper {
     position: fixed;
     display: flex;
-    top: 92%;
-    left: 47%;
+    bottom: 2%;
     width: 5rem;
     height: 5rem;
     background: #07A0EE;
@@ -11,6 +10,11 @@
     text-align: center;
     font-size: 5rem;
     padding: 1rem;
+
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .openedScreenWrapper {

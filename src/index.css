@@ -4,9 +4,16 @@
   margin: 0;
   font-size: calc(100vw / 1512 * 10);
   box-sizing: border-box;
+  line-height: 2.2rem;
 }
 
-@media only screen and (max-width: 480px) {  
+@media only screen and (max-width: 1024px) {
+  * {
+    font-size: calc(100vw / 640 * 10);
+  }
+}
+
+@media only screen and (max-width: 720px) {
   * {
     font-size: calc(100vw / 390 * 10);
   }
@@ -40,11 +47,11 @@ a:hover {
 } */
 
 /* body { */
-  /* margin: 0; */
-  /* display: flex; */
-  /* place-items: center; */
-  /* min-width: 320px; */
-  /* min-height: 100vh; */
+/* margin: 0; */
+/* display: flex; */
+/* place-items: center; */
+/* min-width: 320px; */
+/* min-height: 100vh; */
 /* } */
 
 /* h1 {

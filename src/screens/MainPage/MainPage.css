@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
 }
 
 
@@ -16,10 +17,10 @@
 }
 
 .addWalletBtn {
-    padding: 0.5rem 1.2rem;
-    font-size: 1.4rem;
+    padding: 1rem 2rem;
+    font-size: 2.2rem;
     background: #07A0EE;
-    border-radius: 0.6rem;
+    border-radius: 1.3rem;
     font-weight: 700;
 }
 
@@ -29,14 +30,13 @@ a {
 }
 
 .mainPageWrapper {
-    padding: 1rem 1rem;
+    padding: 3rem 2rem;
 }
 
 .questionsTabs {
     display: flex;
-    justify-content: space-around;
-    margin: 1rem 0;
-
+    justify-content: space-between;
+    margin: 3rem 0;
 }
 
 .questionsTab {
