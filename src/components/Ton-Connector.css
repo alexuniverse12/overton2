@@ -1,0 +1,15 @@
+.qrCodeModal {
+
+    position: absolute;
+    width: 105vh;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.822);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tonConnect {
+    position: relative;
+}

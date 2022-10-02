@@ -6,11 +6,12 @@ import {
 import useLocalStorage from "use-local-storage";
 import isMobile from "is-mobile";
 import QRCode from "react-qr-code";
+import "./Ton-Connector.css"
 
 import { TonClient } from "ton";
 import { TransferTon } from "./TransferTon";
 import { Counter } from "./Counter";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Jetton } from "./Jettons";
 import { TonWalletDetails } from "./TonWalletDetails";
 import useAppModel from "../hooks/useMainReducer";
@@ -36,7 +37,7 @@ export default function TonConnector() {
       window.location.reload();
     }
     wasPendingConnectionChecked = true;
-    console.log(connectionState, "state"); 
+    console.log(connectionState, "state");
   }, [connectionState]);
 
   return (
@@ -66,12 +67,6 @@ function _TonConnecterInternal() {
         <>
           <p>address</p>
         </>
-        // <div style={{ textAlign: "left", marginBottom: 20 }}>
-        //   <TonWalletDetails />
-        //   <TransferTon />
-        //   <Counter />
-        //   <Jetton />
-        // </div>
       )}
     </>
   );
@@ -79,35 +74,28 @@ function _TonConnecterInternal() {
 
 function TonConnect() {
   const connect = useTonhubConnect();
+  const [isOpen, setOpen] = useState<boolean>(false);
 
   if (connect.state.type === "initing") {
     return <span>Waiting for session</span>;
   }
   if (connect.state.type === "pending") {
     return (
-      <div>
-        {isMobile() && (
-          <button
-            onClick={() => {
-              // @ts-ignore
-              window.location.href = connect.state.link.replace(
-                "ton://",
-                "https://tonhub.com/"
-              );
-            }}
-          >
-            Open Tonhub Wallet{" "}
-          </button>
-        )}
-        {!isMobile() && (
-          <div>
-            Scan with your mobile tonhub wallet:
-            <br />
-            <br />
+      <div className="tonConnect">
+
+        {isMobile() && <a className="addWalletBtn" href={connect.state.link.replace(
+          "ton://",
+          "https://tonhub.com/"
+        )
+        }> Add Wallet</a>}
+
+        {!isMobile() &&
+          <div className="qrCodeModal">
+            <div className="qrCodeModalText"> Scan with your mobile tonhub wallet:</div>
             <QRCode value={connect.state.link} />
           </div>
-        )}
-      </div>
+        }
+      </div >
     );
   }
   return <></>;

@@ -1,0 +1,24 @@
+.QuestionWrapper {
+    background: #32BAFF;
+    mix-blend-mode: lighten;
+    border-radius: 1rem;
+    padding: 1rem 1.2rem;
+}
+
+.questionTitle {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+
+.questionText {
+    color: black;
+    margin-top: 0.5rem;
+}
+
+.questionDate {
+    margin-top: 0.5rem;
+    color: black;
+}
