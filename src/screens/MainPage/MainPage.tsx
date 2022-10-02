@@ -14,44 +14,13 @@ import { db } from "../../firebase.config";
 import { TransferTon } from '../../components/TransferTon';
 import CommonHeader from '../../components/CommonHeader/CommonHeader';
 
-const questionsSample = [
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-]
+
 
 const MainPage = () => {
   // const [connectionState, setConnectionState] = useState<RemoteConnectPersistance>('connection', { type: 'initing' });
   const { appModel, dispatch } = useAppModel();
   const connect = useTonhubConnect();
-  const [questions, setQuestions] = useState(questionsSample);
+  const [questions, setQuestions] = useState([]);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -83,9 +52,9 @@ const MainPage = () => {
             </div>
             <div className='questionsWrapper'>
               {
-                questions.map(({questionText, date, title}, index) => {
+                questions.map(({questionText, date, title, contractAddress}, index) => {
                   return (
-                      <Question key={index} title={title} questionText={questionText} date={date} />
+                      <Question key={index} title={title} questionText={questionText} date={date} contractAddress={contractAddress} />
                     )
                   })
                 }

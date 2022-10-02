@@ -46,7 +46,8 @@ export type AppReducerActionType = {
     type: AppReducerActionTypeEnum.HandleCurrQuestion,
     title: string,
     description: string,
-    date: string
+    date: string,
+    contractAddress: string
 } 
 //     type: GameReducerActionTypeEnum.GoNextQuestion,
 //     timeLeft: number
@@ -83,7 +84,8 @@ export const reducer = (state: AppModelType, action: AppReducerActionType): AppM
             currQuestion: {
                 title: action.title,
                 desctiption: action.description,
-                date: action.date
+                date: action.date,
+                contractAddress: action.contractAddress
             }
         };
     }

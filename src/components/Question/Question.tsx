@@ -8,19 +8,20 @@ import "./Question.css"
 export type QuestionProps = {
   title: string,
   questionText: string,
-  date: string
+  date: string,
+  contractAddress: string
 
 }
 
 
-const Question = ({ title, questionText, date }: QuestionProps) => {
+const Question = ({ title, questionText, date, contractAddress}: QuestionProps) => {
   const navigate = useNavigate();
   const { appModel, dispatch } = useAppModel();
 
   return (
     <div className='QuestionWrapper'>
       <h3 className="questionTitle" onClick={() => {
-        dispatch({type: AppReducerActionTypeEnum.HandleCurrQuestion, title: title, description: questionText, date: date})
+        dispatch({type: AppReducerActionTypeEnum.HandleCurrQuestion, title: title, description: questionText, date: date, contractAddress: contractAddress})
         console.log(appModel, "WHY")
         navigate("/singleQuestion")
         

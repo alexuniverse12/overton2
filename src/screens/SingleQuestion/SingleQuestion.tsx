@@ -59,7 +59,7 @@ const SingleQuestion = () => {
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>
-                    <Question title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
+                    <Question contractAddress={appModel.currQuestion.contractAddress} title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
                 </div>
                 <button className='addAnswerBtn' onClick={() => {
                     setModalOpen(true)
