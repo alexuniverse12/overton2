@@ -21,7 +21,6 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
     const connect = useTonhubConnect();
     const { appModel, dispatch } = useAppModel();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const [cont, setCont] = useState()
     const onSubmit = async (formData: any) => {
         //seed
         document.body.style.overflow = 'unset';
@@ -48,7 +47,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         }
                     });
                     const responseData = response.data
-                    console.log(response.data, "SUKA BLYAT");
+                    // console.log(response.data, "SUKA BLYAT");
                     const reqTrans = await connect.api.requestTransaction({
                         to: responseData.contractAddress,
                         value: (formData.rewardAmount * 1e9).toString(),
@@ -56,49 +55,43 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         text: "Smart contract deployment",
                         payload: responseData.payload
                     })
-                    setCont(responseData.contractAddress)
-                    // console.log(reqTrans)
+                    
+                    console.log(reqTrans, "req")
+                    await addDoc(questionsCollection, {
+                        userID: tonData.walletConfig.address,
+                        title: formData.questionTitle,
+                        questionText: formData.questionDescription,
+                        rewardAmount: formData.rewardAmount,
+                        date: rightDate,
+                        questionContractAddress: responseData.contractAddress
+                    });
                     // console.log(JSON.parse(response.data), "SUKA BLYAT");
                 } catch (error) {
                     console.error(error, "IDI NAXUI");
                 }
             }
 
-            try {
-                await addDoc(questionsCollection, {
-                    userID: tonData.walletConfig.address,
-                    title: formData.questionTitle,
-                    questionText: formData.questionDescription,
-                    rewardAmount: formData.rewardAmount,
-                    date: rightDate,
-                    questionContractAddress: cont,
-                });
-
-            } catch (error) {
-                console.log(error)
-            }
+        
             window.location.reload()
 
         } else if (inputFields.type === "submitAnswer") {
             const answersCollection = collection(db, "answers");
             const tonData = JSON.parse(localStorage.getItem("connection") || "")
-            // if (tonData) {
-            //     console.log("TEST 2")
-
-            //     try {
-            //         // console.log(response.data, "SUKA BLYAT");
-            //         const reqTrans = await connect.api.requestTransaction({
-            //             to: appModel.currQuestion.contractAddress,
-            //             value: (0.001 * 1e9).toString(),
-            //             text: appModel.currQuestion.title.splice(15),
-            //         })
-            //         // console.log(reqTrans)
-            //         // console.log(JSON.parse(response.data), "SUKA BLYAT");
-            //     } catch (error) {
-            //         console.error(error, "IDI NAXUI 2");
-            //     }
-            // }
-            // console.log(appModel.currQuestion)
+            if (tonData) {
+                try {
+                    // console.log(response.data, "SUKA BLYAT");
+                    const reqTrans = await connect.api.requestTransaction({
+                        to: appModel.currQuestion.contractAddress,
+                        value: (0.001 * 1e9).toString(),
+                        text: appModel.currQuestion.title.splice(15),
+                    })
+                    // console.log(reqTrans)
+                    // console.log(JSON.parse(response.data), "SUKA BLYAT");
+                } catch (error) {
+                    console.error(error, "IDI NAXUI 2");
+                }
+            }
+            console.log(appModel.currQuestion)
             try {
                 await addDoc(answersCollection, {
                     // @ts-ignore

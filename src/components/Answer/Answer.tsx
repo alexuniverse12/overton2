@@ -4,13 +4,14 @@ import { useTonhubConnect } from "react-ton-x"
 import "./Answer.css"
 
 export type AnswerProps = {
-    title: string,
     answerText: string,
-    date: string
+    date: string,
+    contractAddress: string,
+    userID: string
 }
 
 
-const Answer = ({ title, answerText, date }: AnswerProps) => {
+const Answer = ({answerText, date, contractAddress, userID}: AnswerProps) => {
     const connect = useTonhubConnect()
     const giveReward = async () => {
         const tonData = JSON.parse(localStorage.getItem("connection") || "")
@@ -21,19 +22,19 @@ const Answer = ({ title, answerText, date }: AnswerProps) => {
         const rightDate = mm + '/' + dd + '/' + yyyy;
         if (tonData) {
             try {
+                console.log(userID, "BBB")
                 const response: any = await axios({
                     method: 'post',
                     url: "http://104.248.100.22:3000/withdraw",
                     data: {
-                        send_to_address: tonData.walletConfig.address,
+                        send_to_address: userID,
                     }
                 });
                 const responseData = response.data
                 const reqTrans = await connect.api.requestTransaction({
-                    to: responseData.contractAddress,
+                    to: contractAddress,
                     value: (0.01 * 1e9).toString(),
-                    stateInit: responseData.stateInit,
-                    text: "Smart contract deployment",
+                    text: "Withdraw request",
                     payload: responseData.payload
                 })
                 console.log(reqTrans)

@@ -85,9 +85,9 @@ const SingleQuestion = () => {
                     setModalOpen(true);
                 }}>Create Answer</button>
                 <div className='answersContainer'>
-                    {answers.map(({ answer, date }, index) => {
+                    {answers.map(({ answer, date, userID }, index) => {
                         return (
-                            <Answer key={index} answerText={answer} date={date} />
+                            <Answer key={index} answerText={answer} date={date} contractAddress={appModel.currQuestion.contractAddress} userID={userID} />
                         )
                     })}
                 </div>
