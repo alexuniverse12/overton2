@@ -14,54 +14,21 @@ import { db } from "../../firebase.config";
 import { TransferTon } from '../../components/TransferTon';
 import CommonHeader from '../../components/CommonHeader/CommonHeader';
 
-const questionsSample = [
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-  {
-    title: "how to deploy func  smart contract and not fuck up",
-    questionText: "asdasdasd asd ads a adsd as das das d as das das dasd as da dasdssaasdasdasdsa dsa das aasdasasdas d asd as da dasda sdas das da asasas as asdasd as",
-    date: "01.10.2022"
-  },
-]
-
 const MainPage = () => {
   // const [connectionState, setConnectionState] = useState<RemoteConnectPersistance>('connection', { type: 'initing' });
   const { appModel, dispatch } = useAppModel();
   const connect = useTonhubConnect();
-  const [questions, setQuestions] = useState(questionsSample);
-  
+  const [questions, setQuestions] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, "questions"));
       let arr: any = [];
       querySnapshot.forEach((doc: any) => {
         // here we store order data + its id in firebase
-        arr.push({...doc.data(), id: doc.id});
+        arr.push({ ...doc.data(), id: doc.id });
       })
-      
+
       setQuestions(arr);
       console.log(questions, "SUAK")
     }
@@ -69,33 +36,55 @@ const MainPage = () => {
   }, [])
   console.log(connect.state)
   const [isOpen, setOpen] = useState<boolean>(false);
-  if(questions){
+
+
+  const [myQuestionsTab, setMyQuestionsTab] = useState<boolean>(false);
+
+
+  console.log(questions);
+  if (questions) {
     console.log(questions)
     return (
       <>
         {connect.state.type === "online" && <AddQuestion />}
         <div className='mainPageWrapper'>
           <div className='mainPageContainer'>
-            <CommonHeader/>
+            <CommonHeader />
             <div className='questionsTabs'>
-              <div className='questionsTab'>Questions</div>
-              <div className='myQuestionsTab'>My questions</div>
+              <div style={myQuestionsTab ? {} : {
+                color: "#07A0EE"
+              }} onClick={() => setMyQuestionsTab(false)} className='questionsTab'>Questions</div>
+              <div style={myQuestionsTab ? {
+                color: "#07A0EE"
+              } : {}} onClick={() => setMyQuestionsTab(true)} className='myQuestionsTab'>My questions</div>
             </div>
             <div className='questionsWrapper'>
               {
-                questions.map(({questionText, date, title}, index) => {
-                  return (
+                questions &&
+                ((myQuestionsTab && connect.state.type === 'online' ?
+                  questions.filter(item => {
+                    console.log(item)
+                    console.log(connect)
+                    /* @ts-ignore */
+                    return item.userID !== connect.state!.walletConfig!.address
+                  }).map(({ questionText, date, title }, index) => {
+                    return (
                       <Question key={index} title={title} questionText={questionText} date={date} />
                     )
-                  })
-                }
+                  }) :
+                  questions.map(({ questionText, date, title }, index) => {
+                    return (
+                      <Question key={index} title={title} questionText={questionText} date={date} />
+                    )
+                  })))}
+
             </div>
           </div>
         </div>
       </>
-  
-  
-     );
+
+
+    );
   } else {
     return <></>
   }
