@@ -38,43 +38,47 @@ const InputForm = ({ inputFields }: InputFormProps) => {
             console.log("TEST")
             const tonData = JSON.parse(localStorage.getItem("connection") || "")
             const questionsCollection = collection(db, "questions");
-            if (tonData) {
-                console.log("TEST 2")
+            // if (tonData) {
+            //     console.log("TEST 2")
 
-                try {
-                    // const owner = connect.state.
-                    const response: any = await axios({
-                        method: 'post',
-                        url: "http://104.248.100.22:3000/deploy",
-                        data: {
-                            owner: tonData.walletConfig.address,
-                        }
-                    });
-                    const responseData = response.data
-                    console.log(response.data, "SUKA BLYAT");
-                    const reqTrans = await connect.api.requestTransaction({
-                        to: responseData.contractAddress,
-                        value: formData.rewardAmount,
-                        stateInit: responseData.stateInit,
-                        text: "Smart contract deployment",
-                        payload: responseData.payload
-                    })
-                    console.log(reqTrans)
-                    console.log(JSON.parse(response.data), "SUKA BLYAT");
-                } catch (error) {
-                    console.error(error, "IDI NAXUI");
-                }
+            //     try {
+            //         // const owner = connect.state.
+            //         const response: any = await axios({
+            //             method: 'post',
+            //             url: "http://104.248.100.22:3000/deploy",
+            //             data: {
+            //                 owner: tonData.walletConfig.address,
+            //             }
+            //         });
+            //         const responseData = response.data
+            //         console.log(response.data, "SUKA BLYAT");
+            //         const reqTrans = await connect.api.requestTransaction({
+            //             to: responseData.contractAddress,
+            //             value: formData.rewardAmount,
+            //             stateInit: responseData.stateInit,
+            //             text: "Smart contract deployment",
+            //             payload: responseData.payload
+            //         })
+            //         console.log(reqTrans)
+            //         console.log(JSON.parse(response.data), "SUKA BLYAT");
+            //     } catch (error) {
+            //         console.error(error, "IDI NAXUI");
+            //     }
 
+            // }
+
+            try {
+                await addDoc(questionsCollection, {
+                    userID: tonData.walletConfig.address,
+                    title: formData.questionTitle,
+                    questionText: formData.questionDescription,
+                    rewardAmount: formData.rewardAmount,
+                    date: rightDate
+                });
+
+            } catch (error){
+                console.log(error)
             }
-
-
-            // await addDoc(questionsCollection, {
-            //     userID: tonData.walletConfig.address,
-            //     title: data.questionTitle,
-            //     questionText: data.questionDescription,
-            //     rewardAmount: data.rewardAmount,
-            //     date: rightDate
-            // });
 
             // console.log("user set nickname and languages: ", uid);
             // dispatch(getCustomUserInfo(uid))

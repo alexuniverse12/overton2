@@ -65,10 +65,12 @@ const MainPage = () => {
       setQuestions(arr);
       console.log(questions, "SUAK")
     }
-  })
+    fetchData()
+  }, [])
   console.log(connect.state)
   const [isOpen, setOpen] = useState<boolean>(false);
   if(questions){
+    console.log(questions)
     return (
       <>
         {connect.state.type === "online" && <AddQuestion />}
@@ -81,9 +83,9 @@ const MainPage = () => {
             </div>
             <div className='questionsWrapper'>
               {
-                questions.map(({questionText, date}, index) => {
+                questions.map(({questionText, date, title}, index) => {
                   return (
-                      <Question key={index} title={"aboba 228 asjfdwjej fewf je whh fwe h"} questionText={questionText} date={date} />
+                      <Question key={index} title={title} questionText={questionText} date={date} />
                     )
                   })
                 }

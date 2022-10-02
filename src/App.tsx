@@ -3,7 +3,7 @@ import TonConnector from "./components/Ton-Connector";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router, Routes, Route, BrowserRouter} from 'react-router-dom';
 import MainPage from "./screens/MainPage/MainPage";
-import useAppModel from './hooks/useMainReducer';
+import useAppModel, { AppModelProvider } from './hooks/useMainReducer';
 import SingleQuestion from "./screens/SingleQuestion/SingleQuestion";
 
 const queryClient = new QueryClient();
@@ -12,14 +12,16 @@ function App() {
  
   return (
     <QueryClientProvider client={queryClient}>
-      <TonConnector>
-        <Router>
-            <Routes>
-                <Route path='/' element={<MainPage/>} />
-                <Route path='/singleQuestion' element={<SingleQuestion/>} />
-            </Routes>
-        </Router> 
-      </TonConnector>
+      <AppModelProvider>
+        <TonConnector>
+          <Router>
+              <Routes>
+                  <Route path='/' element={<MainPage/>} />
+                  <Route path='/singleQuestion' element={<SingleQuestion/>} />
+              </Routes>
+          </Router> 
+        </TonConnector>
+      </AppModelProvider>
     </QueryClientProvider>
   )
   

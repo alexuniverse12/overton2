@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBxU1Bm8x74-7igPpzA-P_k3T5sx-BndEc",
-  authDomain: "overton-2ced6.firebaseapp.com",
-  projectId: "overton-2ced6",
-  storageBucket: "overton-2ced6.appspot.com",
-  messagingSenderId: "1014628497934",
-  appId: "1:1014628497934:web:00a4fd86ff0def0b769a5f"
+  apiKey: "AIzaSyB7XW_52ZKFUGd9Kh_CuhT2BI0U1H1ByAo",
+  authDomain: "overton-48000.firebaseapp.com",
+  projectId: "overton-48000",
+  storageBucket: "overton-48000.appspot.com",
+  messagingSenderId: "95087099117",
+  appId: "1:95087099117:web:375795d6f24f216263a0e4"
 };
 
 // Initialize Firebase

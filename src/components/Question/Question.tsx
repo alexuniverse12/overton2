@@ -19,8 +19,10 @@ const Question = ({ title, questionText, date }: QuestionProps) => {
   return (
     <div className='QuestionWrapper'>
       <h3 className="questionTitle" onClick={() => {
-          navigate("/singleQuestion")
-          dispatch({type: AppReducerActionTypeEnum.SetCurrSingleQuestion, title: title, description: questionText, date: date})
+        dispatch({type: AppReducerActionTypeEnum.HandleCurrQuestion, title: title, description: questionText, date: date})
+        console.log(appModel, "WHY")
+        navigate("/singleQuestion")
+        
       }}>
         {title}
       </h3>

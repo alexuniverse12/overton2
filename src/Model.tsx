@@ -1,8 +1,7 @@
 export type AppModelType = {
     questions: QuestionType[],
-    currDraftedQuestion: string,
     signState: any,
-    currSingleQuestion: any
+    currQuestion: any
 } 
 
 export type QuestionType = {

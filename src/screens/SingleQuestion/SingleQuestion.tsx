@@ -43,12 +43,13 @@ const questionAnswers = [
 ]
 const SingleQuestion = () => {
     const { appModel, dispatch } = useAppModel();
+    console.log(appModel)
     return (
         <div className='singleQuestionScreenWrapper'>
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>
-                    <Question title={appModel.currSingleQuestion.title} questionText={appModel.currSingleQuestion.questionText} date={appModel.currSingleQuestion.date} />
+                    <Question title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
                 </div>
                 <button className='addAnswerBtn'>Create Answer</button>
                 <div className='answersContainer'>

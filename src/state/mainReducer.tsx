@@ -13,7 +13,7 @@ export enum AppStatesEnum {
 export enum AppReducerActionTypeEnum {
     AddWallet = "AddWallet",
     SaveDraftedQuestion = "SaveDraftedQuestion",
-    SetCurrSingleQuestion = "SetCurrSingleQuestion"
+    HandleCurrQuestion = "HandleCurrQuestion"
     // ShowIntro = "ShowIntro",
     // StartGame = "StartGame",
     // PickAnswer = "PickAnswer",
@@ -31,8 +31,8 @@ export const getInitialState = (): AppModelType => {
         signState: {
             qrOpened: false
         },
-        currDraftedQuestion: "",
-        currSingleQuestion: {}
+        // currDraftedQuestion: "",
+        currQuestion: null
         
     }
 }
@@ -43,7 +43,7 @@ export type AppReducerActionType = {
     type: AppReducerActionTypeEnum.SaveDraftedQuestion,
     draftedQuestionText: string
 } | {
-    type: AppReducerActionTypeEnum.SetCurrSingleQuestion,
+    type: AppReducerActionTypeEnum.HandleCurrQuestion,
     title: string,
     description: string,
     date: string
@@ -70,16 +70,17 @@ export const reducer = (state: AppModelType, action: AppReducerActionType): AppM
             }
         };
     }
-    if (action.type === AppReducerActionTypeEnum.SaveDraftedQuestion) {
+    // if (action.type === AppReducerActionTypeEnum.SaveDraftedQuestion) {
+    //     return {
+    //         ...state,
+    //         currDraftedQuestion: action.draftedQuestionText
+    //     };
+    // }
+    if (action.type === AppReducerActionTypeEnum.HandleCurrQuestion) {
+        console.log(state, "ABOBA")
         return {
             ...state,
-            currDraftedQuestion: action.draftedQuestionText
-        };
-    }
-    if (action.type === AppReducerActionTypeEnum.SetCurrSingleQuestion) {
-        return {
-            ...state,
-            currSingleQuestion: {
+            currQuestion: {
                 title: action.title,
                 desctiption: action.description,
                 date: action.date
