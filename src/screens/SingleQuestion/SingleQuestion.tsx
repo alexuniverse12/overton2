@@ -52,6 +52,23 @@ const inputFields = {
 const SingleQuestion = () => {
     const { appModel, dispatch } = useAppModel();
     const [modalOpen, setModalOpen] = useState(false);
+    const [answers, setAnswers] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const querySnapshot = await getDocs(collection(db, "answers"));
+            let arr: any = [];
+            querySnapshot.forEach((doc: any) => {
+              console.log(doc.data(), 'suka');
+              if(doc.data().questionID = appModel.currQuestion.contractAddress){
+                  arr.push({ ...doc.data(), id: doc.id });
+              }
+            })
+      
+            setAnswers(arr);
+            // console.log(questions, "SUAK")
+          }
+          fetchData()
+    }, [modalOpen])
 
     return (
         <div className='singleQuestionScreenWrapper'>
@@ -68,9 +85,9 @@ const SingleQuestion = () => {
                     setModalOpen(true);
                 }}>Create Answer</button>
                 <div className='answersContainer'>
-                    {questionAnswers.map(({ answerText, date }, index) => {
+                    {answers.map(({ answer, date }, index) => {
                         return (
-                            <Answer key={index} title={"aboba 228 asjfdwjej fewf je whh fwe h"} answerText={answerText} date={date} />
+                            <Answer key={index} title={answer} answerText={answer} date={date} />
                         )
                     })}
                 </div>

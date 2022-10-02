@@ -103,7 +103,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                     // @ts-ignore
                     userID: connect.state.walletConfig.address,
                     questionID: appModel.currQuestion.contractAddress,
-                    answer: inputFields.answer,
+                    answer: formData.answer,
                     date: rightDate
                 });
 
