@@ -48,7 +48,7 @@ const SingleQuestion = () => {
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>
-                    <Question title={questionSample.title} questionText={questionSample.questionText} date={questionSample.date} />
+                    <Question title={appModel.currSingleQuestion.title} questionText={appModel.currSingleQuestion.questionText} date={appModel.currSingleQuestion.date} />
                 </div>
                 <button className='addAnswerBtn'>Create Answer</button>
                 <div className='answersContainer'>
