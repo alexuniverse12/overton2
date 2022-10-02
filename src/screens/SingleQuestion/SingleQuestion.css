@@ -9,6 +9,11 @@
     margin: 3rem 0;
 }
 
+.container {
+    max-width: 90rem;
+    margin: 0 auto;
+}
+
 .addAnswerBtn {
     padding: 1rem 2rem;
     font-size: 2.2rem;
