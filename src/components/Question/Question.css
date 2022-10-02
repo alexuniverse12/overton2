@@ -1,10 +1,8 @@
 .QuestionWrapper {
-    background: #32BAFF;
+    background: #DDF3FE;
     mix-blend-mode: lighten;
-    border-radius: 1rem;
-    padding: 1rem 1.2rem;
-    height: 18.5rem;
-    width: 95%;
+    border-radius: 1.5rem;
+    padding: 1.8rem;
     max-width: 90rem;
 }
 
@@ -12,18 +10,22 @@
     font-size: 1.9rem;
     display: flex;
     align-items: center;
-
-    color: #FFFFFF;
+    color: black;
+    max-height: 10rem;
+    overflow: hidden;
+    text-decoration: underline;
 }
 
 .questionText {
     color: black;
-    margin-top: 0.5rem;
+    margin-top: 1.1rem;
     font-size: 1.5rem;
+    max-height: 18.5rem;
+    overflow: hidden;
 }
 
 .questionDate {
-    margin-top: 0.5rem;
+    margin-top: 1.3rem;
     color: black;
     font-size: 1.5rem;
 }

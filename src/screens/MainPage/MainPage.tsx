@@ -59,8 +59,8 @@ const MainPage = () => {
       <div className='mainPageWrapper'>
         <div className='headerWrapper'>
           <h3 className='title'>Overton</h3>
-          {/* <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a> */}
-          <TonConnector></TonConnector>
+          <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>
+          {/* <TonConnector></TonConnector> */}
         </div>
 
         <div className='questionsTabs'>
@@ -81,7 +81,7 @@ const MainPage = () => {
     </>
 
 
-   );
+  );
 }
 
 export default MainPage;
