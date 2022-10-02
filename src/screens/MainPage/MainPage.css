@@ -16,9 +16,6 @@
 }
 
 .addWalletBtn {
-    position: absolute;
-    right: 5%;
-    top: 3%;
     padding: 1rem 2rem;
     font-size: 2.2rem;
     background: #07A0EE;
@@ -55,7 +52,6 @@ a {
 .questionsTab {
     font-size: 2.2rem;
     font-weight: 500;
-    color: #07A0EE;
     cursor: pointer;
 }
 
