@@ -45,7 +45,6 @@ const questionsSample = [
 const MainPage = () => {
   // const [connectionState, setConnectionState] = useState<RemoteConnectPersistance>('connection', { type: 'initing' });
   const { appModel, dispatch } = useAppModel();
-  const type = JSON.parse(localStorage.getItem("connection") || "")
   const [question, setQuestions] = useState();
   // console.log(connectionState.type, "F")
   // console.log(localStorage.getItem("connection"))
