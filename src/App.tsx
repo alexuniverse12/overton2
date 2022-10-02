@@ -8,13 +8,16 @@ import useAppModel from './hooks/useMainReducer';
 const queryClient = new QueryClient();
 
 function App() {
+ 
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-          <Routes>
-              <Route path='/' element={<MainPage/>} />
-          </Routes>
-      </Router> 
+      <TonConnector>
+        <Router>
+            <Routes>
+                <Route path='/' element={<MainPage/>} />
+            </Routes>
+        </Router> 
+      </TonConnector>
     </QueryClientProvider>
   )
   
