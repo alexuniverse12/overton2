@@ -4,7 +4,8 @@
     border-radius: 1rem;
     padding: 1rem 1.2rem;
     height: 18.5rem;
-    width: 34.6rem;
+    width: 95%;
+    max-width: 90rem;
 }
 
 .questionTitle {
