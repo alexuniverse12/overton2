@@ -14,7 +14,11 @@ const Answer = ({ title, answerText, date }: AnswerProps) => {
         <div className='AnswerWrapper'>
             <h3 className="answerTitle">{title}</h3>
             <p className="answerText">{answerText}</p>
-            <p className="answerDate">{date}</p>
+
+            <div className="answerFooter">
+                <p className="answerDate">{date}</p>
+                <button className="giveRewardBtn">Give reward</button>
+            </div>
         </div>
 
     );

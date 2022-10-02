@@ -1,10 +1,24 @@
 .AnswerWrapper {
-    background: #DDF3FE;
+    background: #ffffff;
     mix-blend-mode: lighten;
     border-radius: 1.5rem;
     padding: 1.8rem;
 }
 
+.answerFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.giveRewardBtn {
+    all: unset;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    background: #07A0EE;
+    border-radius: 1.3rem;
+    font-weight: 700;
+}
 
 .answerTitle {
     font-size: 1.9rem;
@@ -26,7 +40,6 @@
 }
 
 .answerDate {
-    margin-top: 1.3rem;
     color: black;
     font-size: 1.5rem;
 }
