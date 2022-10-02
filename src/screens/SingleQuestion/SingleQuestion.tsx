@@ -46,23 +46,26 @@ const questionAnswers = [
 const inputFields = {
     answer: "answer",
     type: "submitAnswer"
-    
+
 }
 
 const SingleQuestion = () => {
     const { appModel, dispatch } = useAppModel();
     const [modalOpen, setModalOpen] = useState(false);
+
     return (
         <div className='singleQuestionScreenWrapper'>
-            
-            { modalOpen && <InputForm inputFields={inputFields} />}
+
+            {modalOpen && <div className="openedScreenWrapper" onClick={function (e) { if (e.target === e.currentTarget) { setModalOpen(false); document.body.style.overflow = 'unset'; } }}><InputForm inputFields={inputFields} /></div>}
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>
                     <Question contractAddress={appModel.currQuestion.contractAddress} title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
                 </div>
                 <button className='addAnswerBtn' onClick={() => {
-                    setModalOpen(true)
+                    document.body.style.overflow = 'hidden';
+                    window.scrollTo(0, 0);
+                    setModalOpen(true);
                 }}>Create Answer</button>
                 <div className='answersContainer'>
                     {questionAnswers.map(({ answerText, date }, index) => {
