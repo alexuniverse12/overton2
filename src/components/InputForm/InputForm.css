@@ -12,6 +12,7 @@
     z-index: 1000;
     border-radius: 1.3rem;
     padding: 2rem;
+    word-wrap: break-word;
 }
 
 .addQuestionForm {
