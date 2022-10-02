@@ -68,7 +68,7 @@ function _TonConnecterInternal() {
       {(!isConnected && isOpen)  && <TonConnect isOpen={isOpen} setOpen={setOpen}/>}
       {(isConnected && connect.state.type === "online") && (
         <>
-          <p>{connect.state!.walletConfig!.address.slice(0,20)}...</p>
+          <p className="addressText">{connect.state!.walletConfig!.address.slice(0,4)}...{connect.state!.walletConfig!.address.slice(-5)}</p>
         </>
       )}
     </>

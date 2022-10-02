@@ -12,6 +12,14 @@ import { useForm } from "react-hook-form";
 import "./AddQuestion.css"
 import plus from "../../assets/Vector.svg";
 
+const inputFields = {
+    questionDescription: "questionDescription",
+    questionTitle: "questionTitle",
+    rewardAmount: "rewardAmount",
+    type: "submitQuestion"
+    
+}
+
 //   const AddQuestion = ({title, questionText, date}: QuestionProps) => {
 const AddQuestion = () => {
     const { appModel, dispatch } = useAppModel();
@@ -31,7 +39,7 @@ const AddQuestion = () => {
         window.scrollTo(0, 0);
         return (
             <div className="openedScreenWrapper" onClick={function (e) { if (e.target === e.currentTarget) setOpen(false) }}>
-                <InputForm inputFieldName="draftedQuestion" />
+                <InputForm inputFields={inputFields} />
             </div>
         )
     } else {

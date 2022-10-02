@@ -7,15 +7,17 @@ import { doc, updateDoc, addDoc, collection } from "firebase/firestore";
 import { db } from '../../firebase.config';
 import { useNavigate } from "react-router-dom";
 import { useTonhubConnect } from "react-ton-x";
+import axios from "axios";
 
 
 export type InputFormProps = {
-    inputFieldName: string
+    inputFields: any 
 }
 
 
 
-const InputForm = ({ inputFieldName }: InputFormProps) => {
+const InputForm = ({ inputFields }: InputFormProps) => {
+    const connect = useTonhubConnect();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (data: any) => {
         //seed
@@ -24,16 +26,40 @@ const InputForm = ({ inputFieldName }: InputFormProps) => {
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
-
+        console.log(data)
         const rightDate = mm + '/' + dd + '/' + yyyy;
 
-        if (inputFieldName === "draftedQuestion") {
+        if (inputFields.type === "submitQuestion") {
+            console.log("TEST")
+            const tonData = JSON.parse(localStorage.getItem("connection") || "")
             const questionsCollection = collection(db, "questions");
-            await addDoc(questionsCollection, {
-                userID: tonData.walletConfig.address,
-                questionText: data.draftedQuestion,
-                date: rightDate
-            });
+            if(tonData){
+                console.log("TEST 2")
+                // connect.api.requestTransaction()
+                try {
+                    // const owner = connect.state.
+                    const response: any = await axios({
+                            method: 'post',
+                            url: "http://104.248.100.22:3000/deploy",
+                            data: {
+                              owner: tonData.walletConfig.address,
+                            }
+                    });
+                    console.log(JSON.parse(response), "SUKA BLYAT");
+                } catch (error) {
+                    console.error(error, "IDI NAXUI");
+                }
+
+            }
+
+
+            // await addDoc(questionsCollection, {
+            //     userID: tonData.walletConfig.address,
+            //     title: data.questionTitle,
+            //     questionText: data.questionDescription,
+            //     rewardAmount: data.rewardAmount,
+            //     date: rightDate
+            // });
 
             // console.log("user set nickname and languages: ", uid);
             // dispatch(getCustomUserInfo(uid))
@@ -45,9 +71,9 @@ const InputForm = ({ inputFieldName }: InputFormProps) => {
     return (
         <div className='FormWrapper'>
             <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>
-                <input placeholder="Title" className="questionTitleInput" defaultValue="" {...register(inputFieldName)} />
-                <input placeholder="Reward 💎" className="questionAmountInput" defaultValue="" {...register(inputFieldName)} />
-                <textarea placeholder="Description" className="questionBodyInput" defaultValue="" {...register(inputFieldName)} />
+                <input placeholder="Title" className="questionTitleInput" defaultValue="" {...register(inputFields.questionTitle)} />
+                <input placeholder="Reward 💎" className="questionAmountInput" defaultValue="" {...register(inputFields.rewardAmount)} />
+                <textarea placeholder="Description" className="questionBodyInput" defaultValue="" {...register(inputFields.questionDescription)} />
                 {errors.exampleRequired && <span>This field is required</span>}
                 <input className="questionSubmitBtn" type="submit" />
             </form>
