@@ -11,13 +11,19 @@ import axios from "axios";
 
 
 export type InputFormProps = {
-    inputFields: any 
+    inputFields: any
 }
 
 
 
 const InputForm = ({ inputFields }: InputFormProps) => {
     const connect = useTonhubConnect();
+    console.log(connect, "MEWMEWMEEw");
+
+    // while (connect.state.type !== 'online') {
+    //     setTimeout(() => { }, 1000)
+    //     console.log(connect);
+    // }
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (formData: any) => {
         //seed
@@ -32,17 +38,17 @@ const InputForm = ({ inputFields }: InputFormProps) => {
             console.log("TEST")
             const tonData = JSON.parse(localStorage.getItem("connection") || "")
             const questionsCollection = collection(db, "questions");
-            if(tonData){
+            if (tonData) {
                 console.log("TEST 2")
-                
+
                 try {
                     // const owner = connect.state.
                     const response: any = await axios({
-                            method: 'post',
-                            url: "http://104.248.100.22:3000/deploy",
-                            data: {
-                              owner: tonData.walletConfig.address,
-                            }
+                        method: 'post',
+                        url: "http://104.248.100.22:3000/deploy",
+                        data: {
+                            owner: tonData.walletConfig.address,
+                        }
                     });
                     const responseData = response.data
                     console.log(response.data, "SUKA BLYAT");
