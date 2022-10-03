@@ -37,7 +37,6 @@ export default function TonConnector({children}: {children: any}) {
       window.location.reload();
     }
     wasPendingConnectionChecked = true;
-    console.log(connectionState, "state");
   }, [connectionState]);
 
   return (

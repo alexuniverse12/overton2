@@ -31,7 +31,6 @@ const AddQuestion = () => {
     //     dispatch({type: AppReducerActionTypeEnum.SaveDraftedQuestion, draftedQuestionText: watch("questionText")})
     // }, [isOpen])
 
-    // console.log(appModel)
 
 
     if (isOpen) {

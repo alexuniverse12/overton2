@@ -29,12 +29,8 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
-        // console.log(formData)
         const rightDate = mm + '/' + dd + '/' + yyyy;
-        // const [contractAddress, setContractAddress] = useState("")
         if (inputFields.type === "submitQuestion") {
-            // const tonData = JSON.parse(localStorage.getItem("connection") || "")
-
             const questionsCollection = collection(db, "questions");
             if (tonData) {
                 try {
@@ -47,7 +43,6 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         }
                     });
                     const responseData = response.data
-                    // console.log(response.data, "SUKA BLYAT");
                     const reqTrans = await connect.api.requestTransaction({
                         to: responseData.contractAddress,
                         value: (formData.rewardAmount * 1e9).toString(),
@@ -56,7 +51,6 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         payload: responseData.payload
                     })
                     
-                    console.log(reqTrans, "req")
                     await addDoc(questionsCollection, {
                         userID: tonData.walletConfig.address,
                         title: formData.questionTitle,
@@ -65,7 +59,6 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         date: rightDate,
                         questionContractAddress: responseData.contractAddress
                     });
-                    // console.log(JSON.parse(response.data), "SUKA BLYAT");
                 } catch (error) {
                     console.error(error, "IDI NAXUI");
                 }
@@ -79,19 +72,15 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
             const tonData = JSON.parse(localStorage.getItem("connection") || "")
             if (tonData) {
                 try {
-                    // console.log(response.data, "SUKA BLYAT");
                     const reqTrans = await connect.api.requestTransaction({
                         to: appModel.currQuestion.contractAddress,
                         value: (0.001 * 1e9).toString(),
                         text: appModel.currQuestion.title.splice(15),
                     })
-                    // console.log(reqTrans)
-                    // console.log(JSON.parse(response.data), "SUKA BLYAT");
                 } catch (error) {
                     console.error(error, "IDI NAXUI 2");
                 }
             }
-            console.log(appModel.currQuestion)
             try {
                 await addDoc(answersCollection, {
                     // @ts-ignore
