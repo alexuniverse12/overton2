@@ -33,7 +33,7 @@ export const getInitialState = (): AppModelType => {
         },
         // currDraftedQuestion: "",
         currQuestion: null
-        
+
     }
 }
 
@@ -83,14 +83,14 @@ export const reducer = (state: AppModelType, action: AppReducerActionType): AppM
             ...state,
             currQuestion: {
                 title: action.title,
-                desctiption: action.description,
+                description: action.description,
                 date: action.date,
                 contractAddress: action.contractAddress,
                 reward: action.reward
             }
         };
     }
-    
+
 
     return state;
 }
