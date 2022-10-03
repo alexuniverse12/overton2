@@ -50,9 +50,11 @@ const inputFields = {
 }
 
 const SingleQuestion = () => {
+    
     const { appModel, dispatch } = useAppModel();
     const [modalOpen, setModalOpen] = useState(false);
     const [answers, setAnswers] = useState([]);
+    const connect = useTonhubConnect()
     useEffect(() => {
         const fetchData = async () => {
             const querySnapshot = await getDocs(collection(db, "answers"));
@@ -79,11 +81,14 @@ const SingleQuestion = () => {
                 <div className='singleQuestion'>
                     <Question reward={appModel.currQuestion.reward} contractAddress={appModel.currQuestion.contractAddress} title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
                 </div>
-                <button className='addAnswerBtn' onClick={() => {
+
+                {connect.state.type === "online" && <button className='addAnswerBtn' onClick={() => {
                     document.body.style.overflow = 'hidden';
                     window.scrollTo(0, 0);
                     setModalOpen(true);
-                }}>Create Answer</button>
+                }}>Create Answer
+                </button>
+                }
                 <div className='answersContainer'>
                     {answers.map(({ answer, date, userID }, index) => {
                         return (
