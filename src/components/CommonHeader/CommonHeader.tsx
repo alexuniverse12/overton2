@@ -1,5 +1,6 @@
 import { useState } from "react";
 import QRCode from "react-qr-code";
+import { useNavigate } from "react-router-dom";
 import { useTonhubConnect } from "react-ton-x";
 import "./CommonHeader.css";
 
@@ -8,10 +9,10 @@ export type CommonHeaderProps = {
 
 
 const CommonHeader = ({ }: CommonHeaderProps) => {
-
+  const navigate = useNavigate();
   return (
     <div className="headerWrapper">
-      <h3 className='title'>Overton</h3>
+      <h3 onClick={() => navigate('/')} className='title'>Overton</h3>
       <_TonConnecterInternal />
     </div>
   );
