@@ -59,7 +59,7 @@ const SingleQuestion = () => {
             let arr: any = [];
             querySnapshot.forEach((doc: any) => {
                 console.log(doc.data(), 'suka');
-                if (doc.data().questionID = appModel.currQuestion.contractAddress) {
+                if (doc.data().questionID = appModel.currQuestion?.contractAddress) {
                     arr.push({ ...doc.data(), id: doc.id });
                 }
             })
@@ -69,7 +69,7 @@ const SingleQuestion = () => {
         }
         fetchData()
     }, [modalOpen])
-    console.log(appModel.currQuestion.description)
+    // console.log(appModel.currQuestion.description)
     return (
         <div className='singleQuestionScreenWrapper'>
 
@@ -77,7 +77,7 @@ const SingleQuestion = () => {
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>
-                    <Question reward={0} contractAddress={appModel.currQuestion.contractAddress} title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
+                    <Question reward={appModel.currQuestion.reward} contractAddress={appModel.currQuestion.contractAddress} title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
                 </div>
                 <button className='addAnswerBtn' onClick={() => {
                     document.body.style.overflow = 'hidden';
