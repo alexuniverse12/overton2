@@ -23,7 +23,7 @@ export const tc = new TonClient({
 
 let wasPendingConnectionChecked = false;
 
-export default function TonConnector({children}: {children: any}) {
+export default function TonConnector({ children }: { children: any }) {
   const { appModel, dispatch } = useAppModel();
   const [connectionState, setConnectionState] =
     useLocalStorage<RemoteConnectPersistance>("connection", {
@@ -43,7 +43,7 @@ export default function TonConnector({children}: {children: any}) {
     <TonhubConnectProvider
       network="mainnet"
       url="https://ton.org/"
-      name="TON TWA BOT"
+      name="Overton"
       debug={false}
       connectionState={connectionState}
       setConnectionState={(s) => {
@@ -65,19 +65,19 @@ function _TonConnecterInternal() {
   return (
     <>
       {(!isConnected && !isOpen) && <a className='addWalletBtn' onClick={() => setOpen(true)}>Add Wallet</a>}
-      {(!isConnected && isOpen)  && <TonConnect isOpen={isOpen} setOpen={setOpen}/>}
+      {(!isConnected && isOpen) && <TonConnect isOpen={isOpen} setOpen={setOpen} />}
       {(isConnected && connect.state.type === "online") && (
         <>
-          <p className="addressText">{connect.state!.walletConfig!.address.slice(0,4)}...{connect.state!.walletConfig!.address.slice(-5)}</p>
+          <p className="addressText">{connect.state!.walletConfig!.address.slice(0, 4)}...{connect.state!.walletConfig!.address.slice(-5)}</p>
         </>
       )}
     </>
   );
 }
 
-function TonConnect({isOpen, setOpen}: {isOpen: any, setOpen: React.Dispatch<React.SetStateAction<boolean>>}) {
+function TonConnect({ isOpen, setOpen }: { isOpen: any, setOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
   const connect = useTonhubConnect();
-  
+
 
   if (connect.state.type === "initing") {
     return <span>initiating</span>;
@@ -86,8 +86,19 @@ function TonConnect({isOpen, setOpen}: {isOpen: any, setOpen: React.Dispatch<Rea
     document.body.style.overflow = "hidden"
     return (
       <div className="tonConnect">
-        <h2 className="qrTitle">Scan QR via<br/>TONHUB to sign in</h2>
+        <h2 className="qrTitle">Scan QR via<br />TONHUB to sign in</h2>
         <QRCode value={connect.state.link} />
+        <button
+          onClick={() => {
+            // @ts-ignore
+            window.location.href = connect.state.link.replace(
+              "ton://",
+              "https://tonhub.com/"
+            );
+          }}
+        >
+          Open Tonhub Wallet{" "}
+        </button>
         <a className='addWalletBtn' onClick={() => setOpen(false)}>Close</a>
       </div >
     );
