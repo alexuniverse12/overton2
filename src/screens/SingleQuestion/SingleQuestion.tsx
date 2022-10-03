@@ -45,11 +45,7 @@ const questionAnswers = [
     }
 ]
 
-const inputFields = {
-    answer: "answer",
-    type: "submitAnswer"
 
-}
 
 function useQuery() {
     const { search } = useLocation();
@@ -65,6 +61,11 @@ const SingleQuestion = () => {
     const date = query.get("date")
     const questionText = query.get("questionText")
     // console.log(query.get("title"));
+    const inputFields = {
+        answer: "answer",
+        type: "submitAnswer",
+        contractAddress: contractAddress
+    }
     const { appModel, dispatch } = useAppModel();
     const [modalOpen, setModalOpen] = useState(false);
     const [answers, setAnswers] = useState([]);
@@ -74,7 +75,7 @@ const SingleQuestion = () => {
             const querySnapshot = await getDocs(collection(db, "answers"));
             let arr: any = [];
             querySnapshot.forEach((doc: any) => {
-                if (doc.data().questionID = appModel.currQuestion?.contractAddress) {
+                if (doc.data().questionID === contractAddress) {
                     arr.push({ ...doc.data(), id: doc.id });
                 }
             })
@@ -111,7 +112,7 @@ const SingleQuestion = () => {
                 <div className='answersContainer'>
                     {answers.map(({ answer, date, userID }, index) => {
                         return (
-                            <Answer key={index} answerText={answer} date={date} contractAddress={appModel.currQuestion.contractAddress} userID={userID} />
+                            <Answer key={index} answerText={answer} date={date} contractAddress={contractAddress || ""} userID={userID} />
                         )
                     })}
                 </div>
