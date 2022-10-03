@@ -33,7 +33,7 @@ export const getInitialState = (): AppModelType => {
         },
         // currDraftedQuestion: "",
         currQuestion: null
-        
+
     }
 }
 
@@ -48,7 +48,7 @@ export type AppReducerActionType = {
     description: string,
     date: string,
     contractAddress: string
-} 
+}
 //     type: GameReducerActionTypeEnum.GoNextQuestion,
 //     timeLeft: number
 // } | {
@@ -82,13 +82,13 @@ export const reducer = (state: AppModelType, action: AppReducerActionType): AppM
             ...state,
             currQuestion: {
                 title: action.title,
-                desctiption: action.description,
+                description: action.description,
                 date: action.date,
                 contractAddress: action.contractAddress
             }
         };
     }
-    
+
 
     return state;
 }
