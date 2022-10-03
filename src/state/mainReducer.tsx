@@ -47,7 +47,8 @@ export type AppReducerActionType = {
     title: string,
     description: string,
     date: string,
-    contractAddress: string
+    contractAddress: string,
+    reward: any
 } 
 //     type: GameReducerActionTypeEnum.GoNextQuestion,
 //     timeLeft: number
@@ -84,7 +85,8 @@ export const reducer = (state: AppModelType, action: AppReducerActionType): AppM
                 title: action.title,
                 desctiption: action.description,
                 date: action.date,
-                contractAddress: action.contractAddress
+                contractAddress: action.contractAddress,
+                reward: action.reward
             }
         };
     }

@@ -77,7 +77,7 @@ const SingleQuestion = () => {
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>
-                    <Question contractAddress={appModel.currQuestion.contractAddress} title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
+                    <Question reward={0} contractAddress={appModel.currQuestion.contractAddress} title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
                 </div>
                 <button className='addAnswerBtn' onClick={() => {
                     document.body.style.overflow = 'hidden';
