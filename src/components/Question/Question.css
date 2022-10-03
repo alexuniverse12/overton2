@@ -17,6 +17,20 @@
     cursor: pointer;
 }
 
+.questionFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+
+}
+
+.tonAmount {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: black;
+}
+
 .questionText {
     color: black;
     margin-top: 1.1rem;
@@ -26,7 +40,6 @@
 }
 
 .questionDate {
-    margin-top: 1.3rem;
     color: black;
     font-size: 1.5rem;
 }

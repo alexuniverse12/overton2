@@ -14,21 +14,25 @@ export type QuestionProps = {
 }
 
 
-const Question = ({ title, questionText, date, contractAddress}: QuestionProps) => {
+const Question = ({ title, questionText, date, contractAddress }: QuestionProps) => {
   const navigate = useNavigate();
   const { appModel, dispatch } = useAppModel();
 
   return (
     <div className='QuestionWrapper'>
       <h3 className="questionTitle" onClick={() => {
-        dispatch({type: AppReducerActionTypeEnum.HandleCurrQuestion, title: title, description: questionText, date: date, contractAddress: contractAddress})
+        dispatch({ type: AppReducerActionTypeEnum.HandleCurrQuestion, title: title, description: questionText, date: date, contractAddress: contractAddress })
         navigate("/singleQuestion")
-        
+
       }}>
         {title}
       </h3>
       <p className="questionText">{questionText}</p>
-      <p className="questionDate">{date}</p>
+
+      <div className="questionFooter">
+        <p className="questionDate">{date}</p>
+        <div className="tonAmount">79 💎</div>
+      </div>
     </div>
 
   );
