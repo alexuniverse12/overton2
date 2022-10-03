@@ -31,6 +31,15 @@ function TonConnect({ isOpen, setOpen }: { isOpen: any, setOpen: React.Dispatch<
       <div className="tonConnect">
         <h2 className="qrTitle">Scan QR via<br />TONHUB to sign in</h2>
         <QRCode value={connect.state.link} />
+        <button style={{ border: "none", color: "white" }} className="addWalletBtn"
+          onClick={() => {
+            // @ts-ignore
+            window.location.href = connect.state.link.replace(
+              "ton://",
+              "https://tonhub.com/"
+            );
+          }}
+        >Login via link</button>
         <a className='addWalletBtn' onClick={() => setOpen(false)}>Close</a>
       </div >
     );
