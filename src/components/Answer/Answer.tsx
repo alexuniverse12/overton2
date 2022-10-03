@@ -13,6 +13,12 @@ export type AnswerProps = {
 
 const Answer = ({answerText, date, contractAddress, userID}: AnswerProps) => {
     const connect = useTonhubConnect()
+    const tonData = JSON.parse(localStorage.getItem("connection") || "")
+    const myAddress = tonData.walletConfig?.address
+    {/* @ts-ignore */}
+    // console.log(userID, "-", tonData.walletConfig?.address)
+    {/* @ts-ignore */}
+    const myQuestion = userID === myAddress
     const giveReward = async () => {
         const tonData = JSON.parse(localStorage.getItem("connection") || "")
         let today = new Date();
@@ -38,6 +44,10 @@ const Answer = ({answerText, date, contractAddress, userID}: AnswerProps) => {
                     payload: responseData.payload
                 })
                 console.log(reqTrans)
+                // const userDoc = doc(db, "answers", uid);
+                // await updateDoc(userDoc, {
+                //     myOrders: arrayUnion(orderId.id)
+                // });
             } catch (error) {
                 console.error(error, "IDI NAXUI");
             }
@@ -58,7 +68,7 @@ const Answer = ({answerText, date, contractAddress, userID}: AnswerProps) => {
 
             <div className="answerFooter">
                 <p className="answerDate">{date}</p>
-                <button onClick={() => giveReward()} className="giveRewardBtn">Give reward</button>
+                <button disabled={!myQuestion} onClick={() => giveReward()} className="giveRewardBtn">Give reward</button>
             </div>
         </div>
 

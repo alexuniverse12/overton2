@@ -98,7 +98,8 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                     userID: connect.state.walletConfig.address,
                     questionID: appModel.currQuestion.contractAddress,
                     answer: formData.answer,
-                    date: rightDate
+                    date: rightDate,
+                    answered: false
                 });
 
             } catch (error) {
