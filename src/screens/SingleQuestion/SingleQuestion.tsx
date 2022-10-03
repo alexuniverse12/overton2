@@ -19,6 +19,8 @@ import { TransferTon } from '../../components/TransferTon';
 import "./SingleQuestion.css";
 import CommonHeader from '../../components/CommonHeader/CommonHeader';
 import InputForm from '../../components/InputForm/InputForm';
+import { useLocation } from 'react-router-dom';
+
 
 
 
@@ -49,8 +51,20 @@ const inputFields = {
 
 }
 
+function useQuery() {
+    const { search } = useLocation();
+  
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+
 const SingleQuestion = () => {
-    
+    let query = useQuery();
+    const title = query.get("title")
+    const reward = query.get("reward")
+    const contractAddress = query.get("contractAddress")
+    const date = query.get("date")
+    const questionText = query.get("questionText")
+    // console.log(query.get("title"));
     const { appModel, dispatch } = useAppModel();
     const [modalOpen, setModalOpen] = useState(false);
     const [answers, setAnswers] = useState([]);
@@ -79,7 +93,15 @@ const SingleQuestion = () => {
             <div className='container'>
                 <CommonHeader />
                 <div className='singleQuestion'>
-                    <Question reward={appModel.currQuestion.reward} contractAddress={appModel.currQuestion.contractAddress} title={appModel.currQuestion.title} questionText={appModel.currQuestion.questionText} date={appModel.currQuestion.date} />
+                    {/* <Question reward={appModel?.currQuestion.reward || reward} contractAddress={appModel?.currQuestion.contractAddress || contractAddress} title={appModel?.currQuestion.title || title} questionText={appModel?.currQuestion.questionText || questionText} date={appModel?.currQuestion.date || date} /> */}
+                    
+                    <Question 
+                        reward={reward || ""}
+                        contractAddress={contractAddress || ""}
+                        title={title || ""}
+                        questionText={questionText || ""} 
+                        date={date || ""} 
+                    />
                 </div>
 
                 {connect.state.type === "online" && <button className='addAnswerBtn' onClick={() => {

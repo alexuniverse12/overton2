@@ -23,7 +23,7 @@ const Question = ({ title, questionText, date, contractAddress, reward}: Questio
     <div className='QuestionWrapper'>
       <h3 className="questionTitle" onClick={() => {
         dispatch({type: AppReducerActionTypeEnum.HandleCurrQuestion, title: title, description: questionText, date: date, contractAddress: contractAddress, reward: reward})
-        navigate("/singleQuestion")
+        navigate(`/singleQuestion?title=${title}&questionText=${questionText}&date=${date}&contractAddress=${contractAddress}&reward=${reward}`)
 
       }}>
         {title}
