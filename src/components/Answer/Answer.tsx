@@ -40,7 +40,7 @@ const Answer = ({answerText, date, contractAddress, userID}: AnswerProps) => {
                     payload: responseData.payload
                 })
             } catch (error) {
-                console.error(error, "IDI NAXUI");
+                console.error(error);
             }
         }
     }

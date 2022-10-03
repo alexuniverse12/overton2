@@ -50,7 +50,9 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         text: "Smart contract deployment",
                         payload: responseData.payload
                     })
-                    
+
+                    if (reqTrans.type !== 'success') return;
+
                     await addDoc(questionsCollection, {
                         userID: tonData.walletConfig.address,
                         title: formData.questionTitle,
@@ -60,11 +62,11 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         questionContractAddress: responseData.contractAddress
                     });
                 } catch (error) {
-                    console.error(error, "IDI NAXUI");
+                    console.error(error);
                 }
             }
 
-        
+
             window.location.reload()
 
         } else if (inputFields.type === "submitAnswer") {
@@ -78,7 +80,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         text: appModel.currQuestion.title.splice(15),
                     })
                 } catch (error) {
-                    console.error(error, "IDI NAXUI 2");
+                    console.error(error);
                 }
             }
             try {
@@ -102,11 +104,13 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
     if (inputFields.type === "submitQuestion") {
         return (
             <div className='FormWrapper'>
+
                 <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>
                     <input placeholder="Title" className="questionTitleInput" defaultValue="" {...register(inputFields.questionTitle)} />
                     <input placeholder="Reward 💎" className="questionAmountInput" defaultValue="" {...register(inputFields.rewardAmount)} />
                     <textarea placeholder="Description" className="questionBodyInput" defaultValue="" {...register(inputFields.questionDescription)} />
                     {errors.exampleRequired && <span>This field is required</span>}
+                    {/* @ts-ignore */}
                     <input className="questionSubmitBtn" type="submit" />
                 </form>
             </div>
