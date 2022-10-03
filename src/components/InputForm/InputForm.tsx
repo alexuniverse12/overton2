@@ -20,9 +20,11 @@ export type InputFormProps = {
 const InputForm = ({ inputFields, setModal }: InputFormProps) => {
     const connect = useTonhubConnect();
     const { appModel, dispatch } = useAppModel();
+
+    const [pending, setPending] = useState(false);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (formData: any) => {
-        //seed
+        setPending(true);
         document.body.style.overflow = 'unset';
         const tonData = JSON.parse(localStorage.getItem("connection") || "")
         let today = new Date();
@@ -99,18 +101,18 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
 
             setModal(false)
         }
+        setPending(false);
     };
 
     if (inputFields.type === "submitQuestion") {
         return (
             <div className='FormWrapper'>
-
                 <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>
                     <input placeholder="Title" className="questionTitleInput" defaultValue="" {...register(inputFields.questionTitle)} />
                     <input placeholder="Reward 💎" className="questionAmountInput" defaultValue="" {...register(inputFields.rewardAmount)} />
                     <textarea placeholder="Description" className="questionBodyInput" defaultValue="" {...register(inputFields.questionDescription)} />
                     {errors.exampleRequired && <span>This field is required</span>}
-                    {/* @ts-ignore */}
+                    {pending && <div style={{ fontSize: "2rem" }}>Confirm transaction on Tonhub</div>}
                     <input className="questionSubmitBtn" type="submit" />
                 </form>
             </div>
@@ -121,6 +123,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                 <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>
                     <textarea placeholder="answer" className="questionBodyInput" defaultValue="" {...register(inputFields.answer)} />
                     {errors.exampleRequired && <span>This field is required</span>}
+                    <p>Confirm transaction on Tonhub</p>
                     <input className="questionSubmitBtn" type="submit" />
                 </form>
             </div>
