@@ -20,21 +20,19 @@ export type InputFormProps = {
 const InputForm = ({ inputFields, setModal }: InputFormProps) => {
     const connect = useTonhubConnect();
     const { appModel, dispatch } = useAppModel();
+
+    const [pending, setPending] = useState(false);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (formData: any) => {
-        //seed
+        setPending(true);
         document.body.style.overflow = 'unset';
         const tonData = JSON.parse(localStorage.getItem("connection") || "")
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
-        // console.log(formData)
         const rightDate = mm + '/' + dd + '/' + yyyy;
-        // const [contractAddress, setContractAddress] = useState("")
         if (inputFields.type === "submitQuestion") {
-            // const tonData = JSON.parse(localStorage.getItem("connection") || "")
-
             const questionsCollection = collection(db, "questions");
             if (tonData) {
                 try {
@@ -47,7 +45,6 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         }
                     });
                     const responseData = response.data
-                    // console.log(response.data, "SUKA BLYAT");
                     const reqTrans = await connect.api.requestTransaction({
                         to: responseData.contractAddress,
                         value: (formData.rewardAmount * 1e9).toString(),
@@ -55,8 +52,9 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         text: "Smart contract deployment",
                         payload: responseData.payload
                     })
-                    
-                    console.log(reqTrans, "req")
+
+                    if (reqTrans.type !== 'success') return;
+
                     await addDoc(questionsCollection, {
                         userID: tonData.walletConfig.address,
                         title: formData.questionTitle,
@@ -65,13 +63,12 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                         date: rightDate,
                         questionContractAddress: responseData.contractAddress
                     });
-                    // console.log(JSON.parse(response.data), "SUKA BLYAT");
                 } catch (error) {
-                    console.error(error, "IDI NAXUI");
+                    console.error(error);
                 }
             }
 
-        
+
             window.location.reload()
 
         } else if (inputFields.type === "submitAnswer") {
@@ -79,19 +76,15 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
             const tonData = JSON.parse(localStorage.getItem("connection") || "")
             if (tonData) {
                 try {
-                    // console.log(response.data, "SUKA BLYAT");
                     const reqTrans = await connect.api.requestTransaction({
                         to: appModel.currQuestion.contractAddress,
                         value: (0.001 * 1e9).toString(),
                         text: appModel.currQuestion.title.splice(15),
                     })
-                    // console.log(reqTrans)
-                    // console.log(JSON.parse(response.data), "SUKA BLYAT");
                 } catch (error) {
-                    console.error(error, "IDI NAXUI 2");
+                    console.error(error);
                 }
             }
-            console.log(appModel.currQuestion)
             try {
                 await addDoc(answersCollection, {
                     // @ts-ignore
@@ -108,6 +101,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
 
             setModal(false)
         }
+        setPending(false);
     };
 
     if (inputFields.type === "submitQuestion") {
@@ -118,6 +112,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                     <input placeholder="Reward 💎" className="questionAmountInput" defaultValue="" {...register(inputFields.rewardAmount)} />
                     <textarea placeholder="Description" className="questionBodyInput" defaultValue="" {...register(inputFields.questionDescription)} />
                     {errors.exampleRequired && <span>This field is required</span>}
+                    {pending && <div style={{ fontSize: "2rem" }}>Confirm transaction on Tonhub</div>}
                     <input className="questionSubmitBtn" type="submit" />
                 </form>
             </div>
@@ -128,6 +123,7 @@ const InputForm = ({ inputFields, setModal }: InputFormProps) => {
                 <form className="addQuestionForm" onSubmit={handleSubmit(onSubmit)}>
                     <textarea placeholder="answer" className="questionBodyInput" defaultValue="" {...register(inputFields.answer)} />
                     {errors.exampleRequired && <span>This field is required</span>}
+                    <p>Confirm transaction on Tonhub</p>
                     <input className="questionSubmitBtn" type="submit" />
                 </form>
             </div>

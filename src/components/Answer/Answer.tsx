@@ -15,9 +15,6 @@ const Answer = ({answerText, date, contractAddress, userID}: AnswerProps) => {
     const connect = useTonhubConnect()
     const tonData = JSON.parse(localStorage.getItem("connection") || "")
     const myAddress = tonData.walletConfig?.address
-    {/* @ts-ignore */}
-    // console.log(userID, "-", tonData.walletConfig?.address)
-    {/* @ts-ignore */}
     const myQuestion = userID === myAddress
     const giveReward = async () => {
         const tonData = JSON.parse(localStorage.getItem("connection") || "")
@@ -28,7 +25,6 @@ const Answer = ({answerText, date, contractAddress, userID}: AnswerProps) => {
         const rightDate = mm + '/' + dd + '/' + yyyy;
         if (tonData) {
             try {
-                console.log(userID, "BBB")
                 const response: any = await axios({
                     method: 'post',
                     url: "http://104.248.100.22:3000/withdraw",
@@ -43,22 +39,9 @@ const Answer = ({answerText, date, contractAddress, userID}: AnswerProps) => {
                     text: "Withdraw request",
                     payload: responseData.payload
                 })
-                console.log(reqTrans)
-                // const userDoc = doc(db, "answers", uid);
-                // await updateDoc(userDoc, {
-                //     myOrders: arrayUnion(orderId.id)
-                // });
             } catch (error) {
-                console.error(error, "IDI NAXUI");
+                console.error(error);
             }
-
-
-
-
-
-            // console.log("user set nickname and languages: ", uid);
-            // dispatch(getCustomUserInfo(uid))
-            // navigate("/orders")
         }
     }
 

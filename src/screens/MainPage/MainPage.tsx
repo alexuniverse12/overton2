@@ -30,20 +30,16 @@ const MainPage = () => {
       })
 
       setQuestions(arr);
-      console.log(questions, "SUAK")
     }
     fetchData()
   }, [])
-  console.log(connect.state)
   const [isOpen, setOpen] = useState<boolean>(false);
 
 
   const [myQuestionsTab, setMyQuestionsTab] = useState<boolean>(false);
 
 
-  console.log(questions);
   if (questions) {
-    console.log(questions)
     return (
       <>
         {connect.state.type === "online" && <AddQuestion />}
@@ -63,8 +59,6 @@ const MainPage = () => {
                 questions &&
                 ((myQuestionsTab && connect.state.type === 'online' ?
                   questions.filter(item => {
-                    console.log(item)
-                    console.log(connect)
                     /* @ts-ignore */
                     return item.userID !== connect.state!.walletConfig!.address
                   }).map(({ questionText, date, title, questionContractAddress, rewardAmount}, index) => {
